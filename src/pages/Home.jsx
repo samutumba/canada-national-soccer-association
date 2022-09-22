@@ -16,7 +16,7 @@ export const HomePage = () => {
       
    </div>
    <div className="flex lg:hidden">
-
+    <Icon icon="icon-park:hamburger-button" />
    </div>
    <div className="hidden text-lg lg:flex items-center gap-8">
     <div>Teams</div>
@@ -29,12 +29,12 @@ export const HomePage = () => {
     </div>
    </div>
    <div className="flex flex-col lg:flex-row border rounded-xl lg:h-96 bg-crowd h-full bg-cover mx-auto  max-w-screen-2xl w-full items-center">
-    <div className="lg:w-1/2 flex justify-start flex-col text-white items-center text-7xl h-full font-title font-bold bg-gradient-to-r rounded-l-xl from-black p-10">
-     <p className="text-sm font-paragraph font-normal flex items-center gap-5 py-2 px-5 border border-burn bg-lavender text-burn rounded-full w-fit ml-0 mb-3">
-      Sponsored by <img src="/images/rbc.png" alt="RBC Canada" className="h-6" />
+    <div className="lg:w-1/2 flex justify-start flex-col text-white items-center text-3xl lg:text-7xl h-full font-title font-bold bg-gradient-to-r rounded-l-xl from-black p-10">
+     <p className="text-xs lg:text-sm font-paragraph font-normal flex items-center gap-5 py-2 px-5 border border-burn bg-lavender text-burn rounded-full w-fit ml-0 mb-3">
+      Sponsored by <img src="/images/rbc.png" alt="RBC Canada" className="h-4 lg:h-6" />
      </p>
      <h2>Find the next star</h2>
-     <p className="mt-3 w-full font-paragraph font-normal text-base">
+     <p className="mt-3 w-full font-paragraph font-normal text-sm lg:text-base">
       Welcome to the future of Canadian Scouting. <br />
       Plenty of talents at your fingertips. 
       Create your superteam today
@@ -144,7 +144,6 @@ export const HomePage = () => {
     </div>
     <div className="text-center text-7xl w-36 h-36 flex flex-col gap-8 justify-center">
       <Icon icon="gala:secure" className="mx-auto" />
-    
      <p className="text-base">Secure storage</p>
     </div>
    </div>
