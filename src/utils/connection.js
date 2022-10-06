@@ -1,10 +1,13 @@
-import mysql from 'mysql';
+// import mysql from 'mysql';
 
-const connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'me',
-  password : 'secret',
-  database : 'my_db'
-});
+// const connection = mysql.createConnection({
+//   host     : process.env.DB_SERVER,
+//   user     : process.env.DB_USER,
+//   password : process.env.DB_PWD,
+//   database: process.env.DB_NAME,
+//   port: process.env.DB_PORT
+// });
 
-export { connection }
+// //connection.connect()
+
+// export { connection }

@@ -1,5 +1,7 @@
 import { Avatar } from "flowbite-react"
 import { Icon } from '@iconify/react';
+import { useState } from "react";
+import { MySQLEditor } from "../components/Editor";
 
 export const HomePage = () => {
  return (<div className="w-full">
@@ -25,7 +27,7 @@ export const HomePage = () => {
     <div>Pricing</div>
     </div>
     <div className="hidden lg:flex">
-     <button className="py-2 px-5 rounded-full border border-matte">Sign In</button>
+     <a href="/login" className="py-2 px-5 rounded-full border border-matte">Sign In</a>
     </div>
    </div>
    <div className="flex flex-col lg:flex-row border rounded-xl lg:h-96 bg-crowd h-full bg-cover mx-auto  max-w-screen-2xl w-full items-center">
@@ -147,7 +149,12 @@ export const HomePage = () => {
      <p className="text-base">Secure storage</p>
     </div>
    </div>
-  </div>
+   </div>
+   <div className="w-full py-7 my-2">
+     <MySQLEditor />
+   </div>
   
  </div>)
 }
+
+
