@@ -7,7 +7,7 @@ export const DashboardLayout = ({ children }: {
   children: React.ReactNode,
 }) => {
  return (<>
-  <div className="drawer drawer-mobile bg-slate-300">
+  <div className="drawer drawer-mobile bg-slate-300 font-paragraph">
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
    <div className="drawer-content flex flex-col h-full min-h-screen">
     <nav className='lg:hidden flex flex-row items-center justify-between px-8 py-5 text-2xl bg-slate-50 w-full'> 
@@ -16,8 +16,10 @@ export const DashboardLayout = ({ children }: {
       className=" h-9 w-auto"
       alt="My Logo"
     />  <label htmlFor="my-drawer-2" className="lg:hidden"><Icon icon="charm:menu-hamburger" /></label>
-    </nav>
-     {children}
+       </nav>
+       <div className='p-4 flex-col w-full h-full'>
+          {children}
+       </div>
   </div> 
   <div className="drawer-side">
     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
