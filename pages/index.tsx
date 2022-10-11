@@ -1,10 +1,12 @@
-import { Avatar } from "flowbite-react"
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Image from 'next/image'
+import Avatar from '@mui/material/Avatar';
 import { Icon } from '@iconify/react';
-import { useState } from "react";
-import { MySQLEditor } from "../components/Editor";
 
-export const HomePage = () => {
- return (<div className="w-full">
+const Home: NextPage = () => {
+  return (
+    <div className="w-full">
   <header className="px-5 flex h-full min-h-screen flex-col gap-1">
    <div className="flex w-full max-w-screen-lg mx-auto rounded-lg my-3 px-3 py-3  items-center justify-between">
     <div className="mx-9">
@@ -51,11 +53,12 @@ export const HomePage = () => {
   <div className="flex justify-center flex-wrap text-center gap-4 my-2 items-center">
     <div className="flex flex-row gap-4 justify-center">
       <Avatar
-      img="https://media-exp1.licdn.com/dms/image/C4D03AQEJSRy1Dlr8zw/profile-displayphoto-shrink_800_800/0/1628211852205?e=1669248000&v=beta&t=UevwTFjva5nl8WylszA4HqYY0F661RZ8niaSQLGG1Cs"
-      size="lg"
-      rounded
+      src="https://media-exp1.licdn.com/dms/image/C4D03AQEJSRy1Dlr8zw/profile-displayphoto-shrink_800_800/0/1628211852205?e=1669248000&v=beta&t=UevwTFjva5nl8WylszA4HqYY0F661RZ8niaSQLGG1Cs"
+      sx={{ width: 60, height: 60 }}
       >
-       <div className="space-y-1 font-medium dark:text-white">
+       
+      </Avatar>
+      <div className="space-y-1 font-medium ">
     <div>
       Samuel Mutumba
     </div>
@@ -63,17 +66,15 @@ export const HomePage = () => {
       Team Member
     </div>
   </div>
-      </Avatar>
-      
     </div>
      <div className="flex flex-col gap-4 justify-center">
        <div className="flex flex-row gap-4 justify-center">
       <Avatar
-      img="https://media-exp1.licdn.com/dms/image/C5603AQEk1aOfJE0FmA/profile-displayphoto-shrink_800_800/0/1638591960856?e=1669248000&v=beta&t=SmhSYH5A9Do8aH79RsQUIc15Cr98LmUb_KRmZD2XIB0"
-      size="lg"
-      rounded
+      src="https://media-exp1.licdn.com/dms/image/C5603AQEk1aOfJE0FmA/profile-displayphoto-shrink_800_800/0/1638591960856?e=1669248000&v=beta&t=SmhSYH5A9Do8aH79RsQUIc15Cr98LmUb_KRmZD2XIB0"
+      sx={{ width: 60, height: 60 }}
       >
-       <div className="space-y-1 font-medium dark:text-white">
+       
+      </Avatar><div className="space-y-1 font-medium ">
     <div>
       Sonadi Kannangara
     </div>
@@ -81,18 +82,18 @@ export const HomePage = () => {
       Team Member
     </div>
   </div>
-      </Avatar>
       
     </div>
      </div>
           <div className="flex flex-col gap-4 justify-center">
        <div className="flex flex-row gap-4 justify-center">
       <Avatar
-      img="https://media-exp1.licdn.com/dms/image/C4E03AQF22bANAYgYTA/profile-displayphoto-shrink_800_800/0/1638483571556?e=1669248000&v=beta&t=h0mkZj6snB3Fw5Ut_mWbmuEMuBkZTl6Ffj9a8TBaaoA"
-      size="lg"
-      rounded
+      src="https://media-exp1.licdn.com/dms/image/C4E03AQF22bANAYgYTA/profile-displayphoto-shrink_800_800/0/1638483571556?e=1669248000&v=beta&t=h0mkZj6snB3Fw5Ut_mWbmuEMuBkZTl6Ffj9a8TBaaoA"
+      sx={{ width: 60, height: 60 }}
       >
-       <div className="space-y-1 font-medium dark:text-white">
+      
+      </Avatar>
+       <div className="space-y-1 font-medium ">
     <div>
       Tyler Osbourne
     </div>
@@ -100,19 +101,18 @@ export const HomePage = () => {
       Team Member
     </div>
   </div>
-      </Avatar>
-      
     </div>
     </div>
   
       <div className="flex flex-col gap-4 justify-center">
        <div className="flex flex-row gap-4 justify-center">
       <Avatar
-      img="https://media-exp1.licdn.com/dms/image/C4D03AQHoNv2gLtvpkw/profile-displayphoto-shrink_800_800/0/1632869907594?e=1669248000&v=beta&t=CAHdqxYYYlB8NoJl-OA1iF4EadcjoXUHM6tqEVebYmI"
-      size="lg"
-      rounded
-      >
-       <div className="space-y-1 font-medium dark:text-white">
+      src="https://media-exp1.licdn.com/dms/image/C4D03AQHoNv2gLtvpkw/profile-displayphoto-shrink_800_800/0/1632869907594?e=1669248000&v=beta&t=CAHdqxYYYlB8NoJl-OA1iF4EadcjoXUHM6tqEVebYmI"
+      sx={{ width: 60, height: 60 }}
+       >
+      </Avatar>
+    
+       <div className="space-y-1 font-medium ">
     <div>
       Elaine Nankanja
     </div>
@@ -120,7 +120,6 @@ export const HomePage = () => {
       Team Member
     </div>
   </div>
-      </Avatar>
       
     </div>
     </div>
@@ -150,11 +149,8 @@ export const HomePage = () => {
     </div>
    </div>
    </div>
-   <div className="w-full py-7 my-2">
-     <MySQLEditor />
-   </div>
-  
- </div>)
+ </div>
+  )
 }
 
-
+export default Home
