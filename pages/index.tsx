@@ -1,14 +1,13 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import Avatar from '@mui/material/Avatar';
 import { Icon } from '@iconify/react';
-import { MainLayout } from '../components';
+import { MainLayout, AuthRestricted } from '../components';
 
 const Home: NextPage = () => {
+ 
   return (<MainLayout>
-    <div className="w-full">
-      
+    <AuthRestricted>
+    <div className="w-full mt-4">
         <header className="px-5 flex h-full flex-col gap-1">
    <div className="flex flex-col lg:flex-row border rounded-xl h-96 bg-crowd bg-cover mx-auto  max-w-screen-2xl w-full items-center">
     <div className="lg:w-1/2 flex justify-start flex-col text-white items-center text-3xl lg:text-7xl h-full font-title font-bold bg-gradient-to-r rounded-l-xl from-black p-10">
@@ -16,7 +15,7 @@ const Home: NextPage = () => {
       Sponsored by <img src="/images/rbc.png" alt="RBC Canada" className="h-4 lg:h-6" />
      </p>
      <h2>Find the next star</h2>
-     <p className="mt-3 w-full font-paragraph font-normal text-sm lg:text-base">
+     <p className="mt-3 w-full text-gray-300 font-paragraph font-normal text-sm lg:text-base">
       Welcome to the future of Canadian Scouting. <br />
       Plenty of talents at your fingertips. 
       Create your superteam today 
@@ -104,8 +103,6 @@ const Home: NextPage = () => {
 
    </div>
    </div>
- 
-  </header>
   <div className="flex flex-col mb-4 text-center pb-6 gap-2 justify-center bg-[#0C0101] text-white">
    <h1 className="font-title font-semibold mt-9 text-2xl">Our Features</h1>
    <div className="flex justify-center flex-wrap text-center gap-4 my-2 items-center">
@@ -127,7 +124,10 @@ const Home: NextPage = () => {
     </div>
    </div>
    </div> 
-    </div>
+  </header>
+ 
+      </div>
+      </AuthRestricted>
   </MainLayout>
   )
 }

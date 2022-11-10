@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react"
+import { signOut } from "next-auth/react"
 import Link from "next/link"
 
 export const MainLayout = ({ children }: {
@@ -26,13 +27,18 @@ export const MainLayout = ({ children }: {
       </div> 
    </div>
    <div className="hidden text-lg lg:flex items-center gap-8">
-    <div>Teams</div>
-    <div>About Us</div>
-    <div>Players</div>
-    <div>Pricing</div>
+
     </div>
-    <div className="hidden lg:flex">
-     <Link href="/api/auth/signin" className="py-2 px-5 rounded-full border border-matte">Sign In</Link>
+       <div className="hidden lg:flex">
+         
+         <Link href="/signin">
+           <button className="py-2 px-5 rounded-full border border-matte">
+             Sign In
+           </button>
+         </Link>
+          <button onClick={() => signOut()} className="py-2 px-5 rounded-full border border-matte">
+             Sign out
+           </button>
     </div>
    </div>
     {children}

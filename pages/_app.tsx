@@ -1,34 +1,52 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Toaster } from 'react-hot-toast'
 import { RecoilRoot } from 'recoil'
-import { SessionProvider } from "next-auth/react";
+import { Loader } from '../components'
+import { Hydrate, QueryClient, QueryClientProvider, dehydrate, } from '@tanstack/react-query'
+import React from 'react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-function MyApp({ Component, pageProps: { session, ...pageProps }, }: {
-  Component: AppProps["Component"],
-  pageProps: any
-}) {
+
+
+function MyApp({ Component, pageProps }: AppProps) {
+  // Create a client
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      cacheTime: 1000 * 60 * 15,
+      staleTime: 1000 * 60 * 15,
+      retry: false,
+    }
+  
+  }})
+  const dehydratedState = dehydrate(queryClient)
   return <>
     <Head>
-      <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""></link>
-      <link href="https://fonts.googleapis.com/css2?family=DynaPuff&family=Gantari:wght@300;400&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet"></link>
-      <title>Canadian National Soccer Association</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+     <title>Home - CNSA Recruitment</title>
     </Head>
-     <SessionProvider
-      // Provider options are not required but can be useful in situations where
-      // you have a short session maxAge time. Shown here with default values.
-      session={pageProps.session}
-    >
-      <RecoilRoot>
-      <Component {...pageProps} />
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
-      </RecoilRoot>
-    </SessionProvider>
+
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={dehydratedState}>
+        <RecoilRoot>
+          <Component {...pageProps} />
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+          />
+          <Loader />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </RecoilRoot>
+      </Hydrate>
+      </QueryClientProvider>
   </>
 }
 

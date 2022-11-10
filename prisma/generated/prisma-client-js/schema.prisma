@@ -1,0 +1,299 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  output   = "./generated/prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "../ERD.svg"
+}
+
+model Player {
+  id            String        @id @default(uuid())
+  name          String
+  dob           DateTime
+  isDomestic    Boolean       @default(true)
+  photo         String?
+  gender        String
+  position      Postion
+  healthRecord  HeathRecord?  @relation(fields: [heathRecordId], references: [id])
+  heathRecordId String        @unique
+  phone         String
+  streetAddress String
+  city          String
+  country       String        @default("ca")
+  postalCode    String
+  scholarship   Scholarship[]
+  recruitment   Recruitment[]
+  GameEvent     GameEvent[]
+  Injury        Injury[]
+  Squad         Squad[]
+  Team          Team[]
+}
+
+model Team {
+  id         String    @id @default(uuid())
+  starters   Player[]
+  formation  Formation
+  shirtColor String
+  squad      Squad     @relation(fields: [squadId], references: [id])
+  squadId    String
+  Game       Game?     @relation(fields: [gameId], references: [id])
+  gameId     String?
+}
+
+enum Formation {
+  F4_4_2
+  F4_2_3_1
+  F3_5_2
+  F5_3_2
+  F3_4_3
+  F4_3_3
+}
+
+model Staff {
+  id            String   @id @default(uuid())
+  name          String
+  dob           DateTime
+  phone         String
+  role          Role
+  streetAddress String
+  city          String
+  country       String   @default("Canada")
+  postalCode    String
+  account       Account? @relation(fields: [accountId], references: [id])
+  accountId     String?
+  Squad         Squad[]
+}
+
+enum Role {
+  head_coach
+  doctor
+  therapist
+  recruiter
+  coach
+  nurse
+  kitman
+  referee
+  lawyer
+  teacher
+  other
+}
+
+model Institution {
+  id          String              @id @default(uuid())
+  name        String              @unique
+  address     String
+  city        String
+  province    String
+  postal_code String
+  category    InstitutionCategory
+  scholarship Scholarship[]
+  Squad       Squad[]
+}
+
+enum InstitutionCategory {
+  high_school
+  middle_school
+  college
+  university
+  semi_pro
+  amateur
+  pro
+}
+
+model Location {
+  id            String           @id @default(uuid())
+  name          String
+  category      LocationCategory
+  streetAddress String
+  city          String
+  province      String           @default("ON")
+  country       String           @default("ca")
+  postalCode    String
+  game          Game[]
+  Squad         Squad[]
+}
+
+enum LocationCategory {
+  field
+  stadium
+  park
+  other
+}
+
+model Squad {
+  id            String        @id @default(uuid())
+  name          String
+  players       Player[]
+  institution   Institution   @relation(fields: [institutionId], references: [id])
+  staff         Staff[]
+  competition   Competition[]
+  institutionId String
+  home          Location?     @relation(fields: [locationId], references: [id])
+  homeColor     String?
+  awayColor     String?
+
+  Team       Team[]
+  locationId String?
+}
+
+model Competition {
+  id       String          @id @default(uuid())
+  name     String
+  sponsor  String
+  type     CompetitionType @default(TOURNAMENT)
+  season   Season          @relation(fields: [seasonId], references: [id])
+  seasonId String
+  Squad    Squad[]
+  Game     Game[]
+}
+
+enum CompetitionType {
+  TOURNAMENT
+  LEAGUE
+  FRIENDLY
+}
+
+model Season {
+  id          String        @id @default(uuid())
+  startDate   DateTime      @default(now())
+  endDate     DateTime
+  Competition Competition[]
+}
+
+model HeathRecord {
+  id         String   @id @default(uuid())
+  cardNumber Int      @unique
+  issueDate  DateTime
+  expiryDate DateTime
+  Player     Player?
+}
+
+model Game {
+  id            String      @id @default(uuid())
+  team          Team[]
+  events        GameEvent[]
+  competition   Competition @relation(fields: [competitionId], references: [id])
+  updatedAt     DateTime    @updatedAt
+  location      Location    @relation(fields: [locationId], references: [id])
+  attendance    Int
+  locationId    String
+  competitionId String
+}
+
+model GameEvent {
+  id       String  @id @default(uuid())
+  player   Player  @relation(fields: [playerId], references: [id])
+  minute   Int
+  game     Game?   @relation(fields: [gameId], references: [id])
+  gameId   String?
+  playerId String
+  type     Event
+}
+
+enum Event {
+  goal
+  assist
+  yellow_card
+  red_card
+  substitution_off
+  substitution_on
+}
+
+model Scholarship {
+  id            String      @id @default(uuid())
+  name          String
+  description   String
+  sponsor       Institution @relation(fields: [institutionId], references: [id])
+  player        Player      @relation(fields: [playerId], references: [id])
+  institutionId String
+  playerId      String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Account {
+  id String @id @default(uuid())
+
+  username    String        @unique
+  password    String
+  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime      @default(now())
+  recruitment Recruitment[]
+  Staff       Staff[]
+}
+
+model Recruitment {
+  id         String      @id @default(uuid())
+  player     Player      @relation(fields: [playerId], references: [id])
+  recruiter  Account     @relation(fields: [accountId], references: [id])
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  passed     Boolean     @default(false)
+  interviews Interview[]
+  resume     String?
+  playerId   String
+  accountId  String
+}
+
+model Interview {
+  id            String      @id @default(uuid())
+  stage         Stage       @default(First)
+  passed        Boolean     @default(false)
+  at            DateTime
+  Recruitment   Recruitment @relation(fields: [recruitmentId], references: [id])
+  comment       String
+  recruitmentId String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+enum Stage {
+  First
+  Second
+  Third
+}
+
+enum Postion {
+  goal_keeper
+  right_back
+  center_back
+  left_back
+  defensive_midfielder
+  central_midfielder
+  attacking_midfielder
+  winger
+  striker
+  wing_back
+}
+
+model Injury {
+  id        String      @id @default(uuid())
+  player    Player      @relation(fields: [playerId], references: [id])
+  playerId  String
+  Operation Operation[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Operation {
+  id        String   @id @default(uuid())
+  type      String
+  injury    Injury   @relation(fields: [injuryId], references: [id])
+  date      DateTime @default(now())
+  injuryId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

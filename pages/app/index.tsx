@@ -1,64 +1,61 @@
+import moment from "moment";
 import { NextPage } from "next";
 import { DashboardLayout, PageTitle, CreatePlayer } from "../../components";
 
 const Dashboard: NextPage = () => {
  return (<DashboardLayout>
-  <PageTitle title="Durham College" description="Discover the trending statistics for your team" />
-  <div className="bg-slate-200 m-1 p-3 w-full flex flex-col gap-2 h-full rounded-lg">
-   <div className="w-full flex flex-row flex-wrap justify-right">
-     <CreatePlayer />
+   <PageTitle title="Home" description="Welcome back! Now let's find the next best thing" />
+   <div className="flex justify-end  flex-col mt-4 border rounded-xl h-[24rem] bg-david mx-auto bg-cover bg-[center_top] max-w-screen-2xl w-full text-white">
+     <span className="bg-gradient-to-r justify-center h-full flex flex-col text-left gap-4 items-left from-black self-bottom rounded-l-2xl pl-7 pb-12 w-full lg:w-1/3">
+       <h1 className="text-5xl">Explore </h1>
+       <p>View recent matches, top performers <br />
+         and other important news </p>
+     </span>
    </div>
-   <h1 className="font-title text-2xl font-semibold">Overview</h1>
-   <section className="flex flex-row flex-wrap gap-2">
-     <div className="stats shadow bg-white">
-    <div className="stat">
-      <div className="stat-title">Current Position</div>
-      <div className="stat-value">3rd</div>
-      <div className="stat-desc">Next Game - Ontario Tech (3rd Sept)</div>
-    </div>
-    </div>
-    <div className="stats shadow bg-white">
-     <div className="stat">
-       <div className="stat-title">Total Players</div>
-       <div className="stat-value">560</div>
-       <div className="stat-desc">5% more than last season</div>
-     </div>
-    </div>
-    <div className="stats shadow bg-white">
-    <div className="stat">
-      <div className="stat-title">Total Goals <span className="text-xs">(this season)</span></div>
-      <div className="stat-value">500</div>
-      <div className="stat-desc">21% more than last month</div>
-    </div>
-    </div>
-    <div className="stats shadow bg-white">
-      <div className="stat">
-      <div className="stat-title">Top Scorer</div>
-       <div className="stat-figure text-secondary">
-      <div className="avatar online">
-        <div className="w-16 rounded-full">
-          <img src={`https://avatars.dicebear.com/api/avataaars/${"MINA LABIB"}.svg`} />
-        </div>
-      </div>
-    </div>
-        <div className="stat-value">14</div>
-      <div className="stat-desc">Mina Labib (ST)</div>
-       <div className="stat-desc">Durham College</div>
-      </div>
-    </div>
+   <h2 className="mt-4">
+     Recent Games
+   </h2>
+   <section className="flex my-4 flex-row gap-4 flex-wrap">
+     <section className="flex flex-col justify-center bg-white p-5 rounded-2xl">
+        <span className="w-full max-w-md flex flex-row items-center gap-2">
+       <h3 className="text-right">
+         Durham Lords Men
+       </h3>
+       <div className="h-16 w-16 bg-green-900 rounded-full"></div>
+       <h1 className="text-5xl">1</h1>
+       <span>-</span>
+       <h1 className="text-5xl">2</h1>
+       <div className="h-16 w-16 bg-red-700 rounded-full"></div>
+       <h3>
+         Seneca Stings Men
+       </h3>
+       </span>
+       <p className="text-center">
+         {moment([2022, 10, 18]).calendar()}
+       </p>
+     </section>
+     <section className="flex flex-col justify-center bg-white p-5 rounded-2xl">
+        <span className="w-full max-w-md flex flex-row items-center gap-2">
+       <h3 className="text-right">
+         Durham Lords Men
+       </h3>
+       <div className="h-16 w-16 bg-slate-200 shadow-sm rounded-full"></div>
+       <h1 className="text-5xl">1</h1>
+       <span>-</span>
+       <h1 className="text-5xl">0</h1>
+       <div className="h-16 w-16 bg-green-900 rounded-full"></div>
+       <h3>
+         Algonquin Wolves Mens
+       </h3>
+       </span>
+       <p className="text-center">
+         {moment([2022, 10, 15]).calendar()}
+       </p>
+     </section>
+    
+     
    </section>
-   <div className="flex flex-col w-full lg:flex-row flex-wrap gap-1">
-    <section className="w-full lg:w-5/12">
-     <h1 className="font-title text-2xl font-semibold">Scout List</h1>
-     <div className="overflow-x-auto bg-white rounded-md">
- 
-</div>
-    </section>
-    <section className="w-full lg:w-5/12">
-       <h1 className="font-title text-2xl font-semibold">Player Scouted</h1>
-    </section>
-   </div>
-  </div>
+  
  </DashboardLayout>)
 }
 
