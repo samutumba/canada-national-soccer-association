@@ -61,7 +61,10 @@ const SignInPage: NextPage = () => {
     </Head>
     <AuthRestricted>
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl w-full p-9 max-w-lg flex flex-col gap-2 ">
-        <Image src="/Soccerlogo.png" alt="SignIn" width={'64px'} height={'64px'} className="ml-3 mb-5" />
+        <span className="relative ml-3 mb-5 w-16 h-16">
+          <Image src="/Soccerlogo.png" alt="SignIn" layout="fill"  className="object-fit" />
+        </span>
+
         <h1>Sign In</h1>
         <p>Don&lsquo;t have an account? <Link href="/signup"><a>Sign Up</a></Link></p>
         <label htmlFor="">Username</label>

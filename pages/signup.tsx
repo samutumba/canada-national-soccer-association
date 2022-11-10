@@ -58,10 +58,12 @@ const SignUpPage: NextPage = () => {
  return (<div className="w-full h-full min-h-screen flex justify-center items-center bg-gray-200">
   <Head>
    <title>Sign Up</title>
-  </Head>
+  </Head> 
   <AuthRestricted>
   <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl w-full p-9 max-w-lg flex flex-col gap-2 ">
-   <Image src="/Soccerlogo.png" alt="SignIn" className="ml-3 mb-5" width={64} height={64} />
+       <span className="relative ml-3 mb-5 w-16 h-16">
+         <Image src="/Soccerlogo.png" alt="SignIn" layout="fill" className="object-fit" />
+       </span>
    <h1>Sign Up</h1>
    <p>Already have an account? <Link href="/signin"><a>Sign In </a></Link></p>
    <label htmlFor="">Username</label>

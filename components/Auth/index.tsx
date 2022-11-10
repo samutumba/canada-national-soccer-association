@@ -28,10 +28,9 @@ export const NonAuthRestricted = ({ children }: {
       setLoading(false);
       setUser(res.data.user)
 
-    }).catch((err) => {
+    }).catch(() => {
       setLoading(false);
       setUser(undefined)
-      console.error(err.data.message)
       toast.error("Please Sign in to continue")
       router.push('/signin')
     })
@@ -70,9 +69,8 @@ export const AuthRestricted = ({ children }: {
       setUser(res.data.user)
       router.push('/app')
 
-    }).catch((err) => {
+    }).catch(() => {
       setLoading(false);
-      console.error(err.data.message)
       setUser(undefined)
     })
   

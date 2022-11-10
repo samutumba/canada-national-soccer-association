@@ -19,11 +19,9 @@ export const DashboardLayout = ({ children }: {
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col h-full min-h-screen">
           <nav className='lg:hidden flex flex-row items-center justify-between px-8 py-5 text-2xl w-full'>
-            <Image
-              src="/Soccerlogo.png"
-              className=" h-9 w-auto"
-              alt="My Logo"
-            />
+            <span className="relative ml-3 mb-5 w-16 h-16">
+              <Image src="/Soccerlogo.png" alt="SignIn" layout="fill" className="object-fit" />
+            </span>
             <label htmlFor="my-drawer-2" className="lg:hidden"><Icon icon="charm:menu-hamburger" /></label>
           </nav>
           <div className='p-4 bg-slate-100 flex-col w-full h-full'>

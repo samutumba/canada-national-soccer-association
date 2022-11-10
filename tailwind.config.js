@@ -3,7 +3,6 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
-    
   ],
   theme: {
     extend: {
@@ -28,7 +27,7 @@ module.exports = {
         'stadium': "url('/images/stadium.jpg')",
         'corner': "url('/images/corner.jpg')",
         'kick': "url('/images/bicycle-kick.jpg')",
-        'david': "url('https://cnsa.samutumba.com/images/david-davies.jpeg')",
+        'david': "url('/images/david-davies.jpeg')",
         'other': "",
       }
     },
