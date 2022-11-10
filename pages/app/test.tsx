@@ -16,7 +16,7 @@ const Home: NextPage = () => {
    <PageTitle title="Test" description="Test Page" />
    <div className="bg-slate-200 m-1 p-3 w-full flex flex-col gap-2 h-full rounded-lg">
    <div className="w-full flex flex-row flex-wrap justify-right">
-     <CreatePlayer />
+
    </div>
    <h1 className="font-title text-2xl font-semibold">Overview</h1>
    <section className="flex flex-row flex-wrap gap-2">
