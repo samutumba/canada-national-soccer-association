@@ -1,6 +1,6 @@
 import moment from "moment";
 import { NextPage } from "next";
-import { DashboardLayout, PageTitle, CreatePlayer } from "../../components";
+import { DashboardLayout, PageTitle } from "../../components";
 
 const Dashboard: NextPage = () => {
  return (<DashboardLayout>

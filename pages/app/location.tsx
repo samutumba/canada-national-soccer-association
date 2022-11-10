@@ -1,9 +1,6 @@
 import { NextPage } from "next";
-import { DashboardLayout, PageTitle, CreatePlayer, LocationForm } from "../../components";
-import { GetServerSideProps } from 'next'
-import { client } from "../../lib/prisma";
+import { DashboardLayout, PageTitle, LocationForm } from "../../components";
 import { Icon } from '@iconify/react';
-import { Location } from "../../prisma/generated/prisma-client-js";
 import { useLocations } from "../../hooks";
 import Head from "next/head";
 
