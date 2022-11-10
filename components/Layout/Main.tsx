@@ -1,5 +1,4 @@
 import { Icon } from "@iconify/react"
-import { signOut } from "next-auth/react"
 import Link from "next/link"
 
 export const MainLayout = ({ children }: {
@@ -36,9 +35,7 @@ export const MainLayout = ({ children }: {
              Sign In
            </button>
          </Link>
-          <button onClick={() => signOut()} className="py-2 px-5 rounded-full border border-matte">
-             Sign out
-           </button>
+          
     </div>
    </div>
     {children}

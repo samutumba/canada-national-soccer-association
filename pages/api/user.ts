@@ -3,9 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '../../prisma/generated/prisma-client-js'
 import httpStatus from 'http-status'
 import { PasswordHasher } from '../../lib/bcrypt'
-import { unstable_getServerSession } from "next-auth/next"
-import { authOptions } from "./auth/[...nextauth]"
-import { getToken } from "next-auth/jwt"
 import { getAuthenticatedUser } from '../../lib/auth'
 
 const prisma = new PrismaClient()
