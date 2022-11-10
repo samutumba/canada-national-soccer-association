@@ -8,7 +8,6 @@ const Home: NextPage = () => {
  return (<DashboardLayout>
   <div className="flex flex-row gap-4 items-center">
    <span className="p-3 bg-white rounded-full">
-     <img src="https://durhamlords.com/common/controls/image_handler.aspx?thumb_id=15&image_path=/images/2021/4/30/draft_logo.jpg" alt="DC" className="w-16 h-16"/>
    </span>
    <PageTitle title="Durham Lords" description="Oshawa, ON" />
   </div>
@@ -19,7 +18,7 @@ const Home: NextPage = () => {
     </span>
     <div className="flex flex-col gap-1 text-gray-400 text-sm">
      <h5>Home</h5>
-     <h2 className="text-white text-3xl font-title font-semibold ">Vaso's Field</h2>
+     <h2 className="text-white text-3xl font-title font-semibold ">Vaso&apos;s Field</h2>
      <p>50 Conlin Rd, Oshawa, ON L1H 7K4</p>
     </div>
 

@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react"
+import Image from "next/image"
 import Link from "next/link"
 
 export const MainLayout = ({ children }: {
@@ -10,11 +11,11 @@ export const MainLayout = ({ children }: {
     <div className="flex w-full navbar max-w-screen-lg mx-auto rounded-lg my-3 px-3 py-3  items-center justify-between">
     <div className="mx-9">
      <span className="p-2 rounded-full opacity-75">
-      <img
-      src="/Soccerlogo.png"
-      className="mr-3 h-12 w-auto"
-      alt="My Logo"
-    />
+           <Image
+             src="/Soccerlogo.png"
+             className="mr-3 h-12 w-auto"
+             alt="My Logo"
+           />
      </span>
       
    </div>
@@ -43,11 +44,12 @@ export const MainLayout = ({ children }: {
   <div className="drawer-side">
     <label htmlFor="my-drawer-3" className="drawer-overlay"></label> 
     <ul className="menu p-4 overflow-y-auto z-10 w-80 bg-base-100">
-      <li><a href="/"><img
+       <li><Link href="/"><a ><Image
       src="/Soccerlogo.png"
       className="mr-3 h-12 w-auto"
       alt="My Logo"
-    /></a></li>
+    /></a>
+       </Link></li>
       <li><a href="/login" className="py-2 px-5 rounded-full border border-matte">Sign In</a></li>
       
     </ul>

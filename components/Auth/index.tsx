@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useRouter } from 'next/router'
 import { toast } from "react-hot-toast"
 import { useRecoilState, useSetRecoilState } from "recoil"
-import { loadingState, TokenState, UserState } from "../../atoms"
+import { loadingState, UserState } from "../../atoms"
 import axios from "axios"
 import Cookies from 'js-cookie'
 
@@ -31,6 +31,7 @@ export const NonAuthRestricted = ({ children }: {
     }).catch((err) => {
       setLoading(false);
       setUser(undefined)
+      console.error(err.data.message)
       toast.error("Please Sign in to continue")
       router.push('/signin')
     })
@@ -38,7 +39,7 @@ export const NonAuthRestricted = ({ children }: {
   
 
 
- }, [])
+  }, [router, setLoading, setUser ,user ])
   
  if (user) {
   return <>{children}</>
@@ -71,10 +72,11 @@ export const AuthRestricted = ({ children }: {
 
     }).catch((err) => {
       setLoading(false);
+      console.error(err.data.message)
       setUser(undefined)
     })
   
-  }, [])
+  }, [router, setLoading, setUser, user])
 
  if (!user) {
   return <>{children}</>

@@ -15,23 +15,24 @@ function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-      cacheTime: 1000 * 60 * 15,
-      staleTime: 1000 * 60 * 15,
-      retry: false,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+        cacheTime: 1000 * 60 * 15,
+        staleTime: 1000 * 60 * 15,
+        retry: false,
+      }
+
     }
-  
-  }})
+  })
   const dehydratedState = dehydrate(queryClient)
   return <>
     <Head>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
-     <title>Home - CNSA Recruitment</title>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+      />
+      <title>Home - CNSA Recruitment</title>
     </Head>
 
     <QueryClientProvider client={queryClient}>
@@ -46,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ReactQueryDevtools initialIsOpen={false} />
         </RecoilRoot>
       </Hydrate>
-      </QueryClientProvider>
+    </QueryClientProvider>
   </>
 }
 

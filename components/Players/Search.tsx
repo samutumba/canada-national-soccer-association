@@ -1,8 +1,7 @@
-import { useState } from "react"
 import { Icon } from '@iconify/react';
 
 export const SearchPlayers = () => {
- const search = useState('')
+
  return (<div className="bg-white w-full rounded-lg flex flex-col flex-wrap gap-2 justify-center p-2">
   <input type="text" placeholder="Find player" className="input w-full max-w-2xl mx-auto" />
   

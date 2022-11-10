@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Avatar from '@mui/material/Avatar';
 import { Icon } from '@iconify/react';
 import { MainLayout, AuthRestricted } from '../components';
+import Image from 'next/image';
 
 const Home: NextPage = () => {
  
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
    <div className="flex flex-col lg:flex-row border rounded-xl h-96 bg-crowd bg-cover mx-auto  max-w-screen-2xl w-full items-center">
     <div className="lg:w-1/2 flex justify-start flex-col text-white items-center text-3xl lg:text-7xl h-full font-title font-bold bg-gradient-to-r rounded-l-xl from-black p-10">
      <p className="text-xs lg:text-sm font-paragraph font-normal flex items-center gap-5 py-2 px-5 border border-burn bg-lavender text-burn rounded-full w-fit ml-0 mb-3">
-      Sponsored by <img src="/images/rbc.png" alt="RBC Canada" className="h-4 lg:h-6" />
+      Sponsored by <Image src="/images/rbc.png" alt="RBC Canada" className="h-4 lg:h-6" height={24} />
      </p>
      <h2>Find the next star</h2>
      <p className="mt-3 w-full text-gray-300 font-paragraph font-normal text-sm lg:text-base">

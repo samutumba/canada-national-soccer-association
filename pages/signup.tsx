@@ -6,9 +6,11 @@ import { toast } from "react-hot-toast";
 import Head from "next/head";
 import axios from "axios";
 import { useRouter } from 'next/router'
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { loadingState } from "../atoms";
 import { AuthRestricted } from "../components";
+import Link from "next/link";
+import Image from "next/image";
 
 const formSchema = Yup.object().shape({
     username: Yup.string()
@@ -23,9 +25,9 @@ const formSchema = Yup.object().shape({
 
 const SignUpPage: NextPage = () => {
  const router = useRouter()
- const [loading, setLoading ] = useRecoilState(loadingState)
+ const setLoading  = useSetRecoilState(loadingState)
  
- const { register, handleSubmit, watch, formState: { errors } } = useForm<{
+ const { register, handleSubmit,  formState: { errors } } = useForm<{
   username: string,
   password: string,
   confirmPassword: string
@@ -59,9 +61,9 @@ const SignUpPage: NextPage = () => {
   </Head>
   <AuthRestricted>
   <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl w-full p-9 max-w-lg flex flex-col gap-2 ">
-   <img src="/Soccerlogo.png" alt="SignIn" className="w-16 h-16 ml-3 mb-5" />
+   <Image src="/Soccerlogo.png" alt="SignIn" className="ml-3 mb-5" width={64} height={64} />
    <h1>Sign Up</h1>
-   <p>Already have an account? <a href="/signin">Sign In </a></p>
+   <p>Already have an account? <Link href="/signin"><a>Sign In </a></Link></p>
    <label htmlFor="">Username</label>
    <input className={`${errors.username ? "input-error" : "input-okay"}`} type="text" {...register("username")} />
    {errors.username && <span className="error">{ errors.username.message }</span>}

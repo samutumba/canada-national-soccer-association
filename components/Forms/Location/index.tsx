@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from 'yup'
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { loadingState } from "../../../atoms";
 import { useForm } from "react-hook-form";
 import Select from 'react-select';
@@ -54,9 +54,9 @@ export const LocationForm = ({ location, children }: { location?: Location, chil
 
   const queryClient = useQueryClient()
  const [open, setOpen] = useState(false)
-  const [loading, setLoading ] = useRecoilState(loadingState)
+  const setLoading  = useSetRecoilState(loadingState)
 
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<createOrUpdateLocationState>({
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<createOrUpdateLocationState>({
    mode: "onTouched",
     resolver: yupResolver(formSchema),
     defaultValues: {
@@ -132,7 +132,7 @@ export const LocationForm = ({ location, children }: { location?: Location, chil
            options={categories.flatMap(c => { return { label: c, value: c } })}
            className="capitalize"
            defaultValue={categories.flatMap(c => { return { label: c, value: c } }).at(0)}
-           onChange={ (value, actionValue) =>  value?.value && setValue('category', value.value)} />
+           onChange={ (value,) =>  value?.value && setValue('category', value.value)} />
          {errors.category && <span className="error">{ errors.category.message }</span>}
 
 

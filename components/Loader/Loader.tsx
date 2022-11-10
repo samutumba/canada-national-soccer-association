@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilValue } from "recoil"
 import { loadingState } from "../../atoms"
 import Backdrop from '@mui/material/Backdrop';
 
@@ -7,7 +7,7 @@ export const Loader = () => {
  return (<Backdrop
         sx={{ color: '#121212', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
-        onClick={() => {}}
+        onClick={() => { console.log('\n Loading... \n')}}
       > <div className="main-fader">
   <div className="loader">
 <svg viewBox="0 0 866 866" xmlns="http://www.w3.org/2000/svg">

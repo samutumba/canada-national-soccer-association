@@ -3347,18 +3347,18 @@ var require_cross_spawn = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+engines-version@4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3/node_modules/@prisma/engines-version/package.json
+// ../../node_modules/.pnpm/@prisma+engines-version@4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32/node_modules/@prisma/engines-version/package.json
 var require_package = __commonJS({
-  "../../node_modules/.pnpm/@prisma+engines-version@4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3/node_modules/@prisma/engines-version/package.json"(exports, module2) {
+  "../../node_modules/.pnpm/@prisma+engines-version@4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32/node_modules/@prisma/engines-version/package.json"(exports, module2) {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3",
+      version: "4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "2e719efb80b56a3f32d18a62489de95bb9c130e3"
+        enginesVersion: "694eea289a8462c80264df36757e4fdc129b1b32"
       },
       repository: {
         type: "git",
@@ -3380,9 +3380,9 @@ var require_package = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+engines-version@4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3/node_modules/@prisma/engines-version/index.js
+// ../../node_modules/.pnpm/@prisma+engines-version@4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32/node_modules/@prisma/engines-version/index.js
 var require_engines_version = __commonJS({
-  "../../node_modules/.pnpm/@prisma+engines-version@4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3/node_modules/@prisma/engines-version/index.js"(exports) {
+  "../../node_modules/.pnpm/@prisma+engines-version@4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32/node_modules/@prisma/engines-version/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.enginesVersion = void 0;
@@ -19721,7 +19721,7 @@ var require_package3 = __commonJS({
   "package.json"(exports, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "4.6.0",
+      version: "4.6.1",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -19791,15 +19791,15 @@ var require_package3 = __commonJS({
         "@opentelemetry/resources": "1.7.0",
         "@opentelemetry/sdk-trace-base": "1.7.0",
         "@opentelemetry/semantic-conventions": "1.7.0",
-        "@prisma/debug": "workspace:4.6.0",
-        "@prisma/engine-core": "workspace:4.6.0",
-        "@prisma/engines": "workspace:4.6.0",
-        "@prisma/fetch-engine": "workspace:4.6.0",
-        "@prisma/generator-helper": "workspace:4.6.0",
-        "@prisma/get-platform": "workspace:4.6.0",
-        "@prisma/instrumentation": "workspace:4.6.0",
-        "@prisma/internals": "workspace:4.6.0",
-        "@prisma/migrate": "workspace:4.6.0",
+        "@prisma/debug": "workspace:4.6.1",
+        "@prisma/engine-core": "workspace:4.6.1",
+        "@prisma/engines": "workspace:4.6.1",
+        "@prisma/fetch-engine": "workspace:4.6.1",
+        "@prisma/generator-helper": "workspace:4.6.1",
+        "@prisma/get-platform": "workspace:4.6.1",
+        "@prisma/instrumentation": "workspace:4.6.1",
+        "@prisma/internals": "workspace:4.6.1",
+        "@prisma/migrate": "workspace:4.6.1",
         "@prisma/mini-proxy": "0.3.0",
         "@swc-node/register": "1.5.4",
         "@swc/core": "1.3.14",
@@ -19870,7 +19870,7 @@ var require_package3 = __commonJS({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3"
+        "@prisma/engines-version": "4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32"
       },
       sideEffects: false
     };
@@ -29548,10 +29548,10 @@ __name(backOff, "backOff");
 
 // ../engines/package.json
 var devDependencies = {
-  "@prisma/debug": "workspace:4.6.0",
-  "@prisma/engines-version": "4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3",
-  "@prisma/fetch-engine": "workspace:4.6.0",
-  "@prisma/get-platform": "workspace:4.6.0",
+  "@prisma/debug": "workspace:4.6.1",
+  "@prisma/engines-version": "4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32",
+  "@prisma/fetch-engine": "workspace:4.6.1",
+  "@prisma/get-platform": "workspace:4.6.1",
   "@swc/core": "1.3.14",
   "@swc/jest": "0.2.23",
   "@types/jest": "28.1.8",

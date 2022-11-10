@@ -1,10 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import jwt from 'jsonwebtoken'
 import { Account, PrismaClient } from '../../prisma/generated/prisma-client-js'
 import { PasswordHasher } from "../../lib/bcrypt"
 import { Tokenizer } from '../../lib/jwt'
-import { HttpStatusCode } from 'axios'
 import httpStatus from 'http-status'
 
 const prisma = new PrismaClient()

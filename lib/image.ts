@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export class ImageHosting {
- static async upload(file: String) {
+ static async upload(file: string) {
   axios.post('https://freeimage.host/api/1/upload', {
    key: process.env.FREE_IMAGE_API_KEY,
    action: "upload",
