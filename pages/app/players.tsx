@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import React from "react";
+import Head from "next/head";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -46,7 +47,10 @@ const Home: NextPage = () => {
     setValue(newValue);
  };
  
- return (<DashboardLayout>
+  return (<DashboardLayout>
+    <Head>
+      <title>Players - CNSA</title>
+    </Head>
   <PageTitle title="Players" description="Look for the next big thing" />
   <div className="bg-slate-200 m-1 p-3 w-full flex flex-col gap-2 h-full rounded-lg">
    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

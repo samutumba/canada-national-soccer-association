@@ -38,6 +38,7 @@
     "react-hook-form": "^7.39.2",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.4.0",
+    "react-phone-number-input": "^3.2.12",
     "react-select": "^5.6.0",
     "recharts": "^2.1.16",
     "recoil": "^0.7.5",

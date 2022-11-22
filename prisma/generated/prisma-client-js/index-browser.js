@@ -188,6 +188,7 @@ exports.Prisma.PlayerScalarFieldEnum = makeEnum({
   phone: 'phone',
   streetAddress: 'streetAddress',
   city: 'city',
+  province: 'province',
   country: 'country',
   postalCode: 'postalCode'
 });

@@ -47,8 +47,7 @@ const SignInPage: NextPage = () => {
       toast.success("Welcome")
       router.push('/app');
     }).catch((err) => {
-      console.error(err.data.message)
-      setLoading(false)
+      setLoading(false);
       reset()
       toast.error("Please check your credentials and try again")
     })
@@ -60,7 +59,7 @@ const SignInPage: NextPage = () => {
       <title>Sign In</title>
     </Head>
     <AuthRestricted>
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl w-full p-9 max-w-lg flex flex-col gap-2 ">
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-white m-4 rounded-2xl w-full p-9 max-w-lg flex flex-col gap-2 ">
         <span className="relative ml-3 mb-5 w-16 h-16">
           <Image src="/Soccerlogo.png" alt="SignIn" layout="fill"  className="object-fit" />
         </span>

@@ -24,10 +24,11 @@ export type Player = {
   photo: string | null
   gender: string
   position: Postion
-  heathRecordId: string
+  heathRecordId: string | null
   phone: string
   streetAddress: string
   city: string
+  province: string
   country: string
   postalCode: string
 }
@@ -131,7 +132,7 @@ export type Season = {
  */
 export type HeathRecord = {
   id: string
-  cardNumber: number
+  cardNumber: string
   issueDate: Date
   expiryDate: Date
 }
@@ -1894,6 +1895,7 @@ export namespace Prisma {
     phone: string | null
     streetAddress: string | null
     city: string | null
+    province: string | null
     country: string | null
     postalCode: string | null
   }
@@ -1910,6 +1912,7 @@ export namespace Prisma {
     phone: string | null
     streetAddress: string | null
     city: string | null
+    province: string | null
     country: string | null
     postalCode: string | null
   }
@@ -1926,6 +1929,7 @@ export namespace Prisma {
     phone: number
     streetAddress: number
     city: number
+    province: number
     country: number
     postalCode: number
     _all: number
@@ -1944,6 +1948,7 @@ export namespace Prisma {
     phone?: true
     streetAddress?: true
     city?: true
+    province?: true
     country?: true
     postalCode?: true
   }
@@ -1960,6 +1965,7 @@ export namespace Prisma {
     phone?: true
     streetAddress?: true
     city?: true
+    province?: true
     country?: true
     postalCode?: true
   }
@@ -1976,6 +1982,7 @@ export namespace Prisma {
     phone?: true
     streetAddress?: true
     city?: true
+    province?: true
     country?: true
     postalCode?: true
     _all?: true
@@ -2067,10 +2074,11 @@ export namespace Prisma {
     photo: string | null
     gender: string
     position: Postion
-    heathRecordId: string
+    heathRecordId: string | null
     phone: string
     streetAddress: string
     city: string
+    province: string
     country: string
     postalCode: string
     _count: PlayerCountAggregateOutputType | null
@@ -2105,6 +2113,7 @@ export namespace Prisma {
     phone?: boolean
     streetAddress?: boolean
     city?: boolean
+    province?: boolean
     country?: boolean
     postalCode?: boolean
     scholarship?: boolean | ScholarshipFindManyArgs
@@ -9522,30 +9531,20 @@ export namespace Prisma {
 
   export type AggregateHeathRecord = {
     _count: HeathRecordCountAggregateOutputType | null
-    _avg: HeathRecordAvgAggregateOutputType | null
-    _sum: HeathRecordSumAggregateOutputType | null
     _min: HeathRecordMinAggregateOutputType | null
     _max: HeathRecordMaxAggregateOutputType | null
   }
 
-  export type HeathRecordAvgAggregateOutputType = {
-    cardNumber: number | null
-  }
-
-  export type HeathRecordSumAggregateOutputType = {
-    cardNumber: number | null
-  }
-
   export type HeathRecordMinAggregateOutputType = {
     id: string | null
-    cardNumber: number | null
+    cardNumber: string | null
     issueDate: Date | null
     expiryDate: Date | null
   }
 
   export type HeathRecordMaxAggregateOutputType = {
     id: string | null
-    cardNumber: number | null
+    cardNumber: string | null
     issueDate: Date | null
     expiryDate: Date | null
   }
@@ -9558,14 +9557,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type HeathRecordAvgAggregateInputType = {
-    cardNumber?: true
-  }
-
-  export type HeathRecordSumAggregateInputType = {
-    cardNumber?: true
-  }
 
   export type HeathRecordMinAggregateInputType = {
     id?: true
@@ -9632,18 +9623,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: HeathRecordAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: HeathRecordSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: HeathRecordMinAggregateInputType
@@ -9674,8 +9653,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: HeathRecordCountAggregateInputType | true
-    _avg?: HeathRecordAvgAggregateInputType
-    _sum?: HeathRecordSumAggregateInputType
     _min?: HeathRecordMinAggregateInputType
     _max?: HeathRecordMaxAggregateInputType
   }
@@ -9683,12 +9660,10 @@ export namespace Prisma {
 
   export type HeathRecordGroupByOutputType = {
     id: string
-    cardNumber: number
+    cardNumber: string
     issueDate: Date
     expiryDate: Date
     _count: HeathRecordCountAggregateOutputType | null
-    _avg: HeathRecordAvgAggregateOutputType | null
-    _sum: HeathRecordSumAggregateOutputType | null
     _min: HeathRecordMinAggregateOutputType | null
     _max: HeathRecordMaxAggregateOutputType | null
   }
@@ -18160,6 +18135,7 @@ export namespace Prisma {
     phone: 'phone',
     streetAddress: 'streetAddress',
     city: 'city',
+    province: 'province',
     country: 'country',
     postalCode: 'postalCode'
   };
@@ -18276,10 +18252,11 @@ export namespace Prisma {
     gender?: StringFilter | string
     position?: EnumPostionFilter | Postion
     healthRecord?: XOR<HeathRecordRelationFilter, HeathRecordWhereInput> | null
-    heathRecordId?: StringFilter | string
+    heathRecordId?: StringNullableFilter | string | null
     phone?: StringFilter | string
     streetAddress?: StringFilter | string
     city?: StringFilter | string
+    province?: StringFilter | string
     country?: StringFilter | string
     postalCode?: StringFilter | string
     scholarship?: ScholarshipListRelationFilter
@@ -18303,6 +18280,7 @@ export namespace Prisma {
     phone?: SortOrder
     streetAddress?: SortOrder
     city?: SortOrder
+    province?: SortOrder
     country?: SortOrder
     postalCode?: SortOrder
     scholarship?: ScholarshipOrderByRelationAggregateInput
@@ -18330,6 +18308,7 @@ export namespace Prisma {
     phone?: SortOrder
     streetAddress?: SortOrder
     city?: SortOrder
+    province?: SortOrder
     country?: SortOrder
     postalCode?: SortOrder
     _count?: PlayerCountOrderByAggregateInput
@@ -18348,10 +18327,11 @@ export namespace Prisma {
     photo?: StringNullableWithAggregatesFilter | string | null
     gender?: StringWithAggregatesFilter | string
     position?: EnumPostionWithAggregatesFilter | Postion
-    heathRecordId?: StringWithAggregatesFilter | string
+    heathRecordId?: StringNullableWithAggregatesFilter | string | null
     phone?: StringWithAggregatesFilter | string
     streetAddress?: StringWithAggregatesFilter | string
     city?: StringWithAggregatesFilter | string
+    province?: StringWithAggregatesFilter | string
     country?: StringWithAggregatesFilter | string
     postalCode?: StringWithAggregatesFilter | string
   }
@@ -18751,7 +18731,7 @@ export namespace Prisma {
     OR?: Enumerable<HeathRecordWhereInput>
     NOT?: Enumerable<HeathRecordWhereInput>
     id?: StringFilter | string
-    cardNumber?: IntFilter | number
+    cardNumber?: StringFilter | string
     issueDate?: DateTimeFilter | Date | string
     expiryDate?: DateTimeFilter | Date | string
     Player?: XOR<PlayerRelationFilter, PlayerWhereInput> | null
@@ -18767,7 +18747,7 @@ export namespace Prisma {
 
   export type HeathRecordWhereUniqueInput = {
     id?: string
-    cardNumber?: number
+    cardNumber?: string
   }
 
   export type HeathRecordOrderByWithAggregationInput = {
@@ -18776,10 +18756,8 @@ export namespace Prisma {
     issueDate?: SortOrder
     expiryDate?: SortOrder
     _count?: HeathRecordCountOrderByAggregateInput
-    _avg?: HeathRecordAvgOrderByAggregateInput
     _max?: HeathRecordMaxOrderByAggregateInput
     _min?: HeathRecordMinOrderByAggregateInput
-    _sum?: HeathRecordSumOrderByAggregateInput
   }
 
   export type HeathRecordScalarWhereWithAggregatesInput = {
@@ -18787,7 +18765,7 @@ export namespace Prisma {
     OR?: Enumerable<HeathRecordScalarWhereWithAggregatesInput>
     NOT?: Enumerable<HeathRecordScalarWhereWithAggregatesInput>
     id?: StringWithAggregatesFilter | string
-    cardNumber?: IntWithAggregatesFilter | number
+    cardNumber?: StringWithAggregatesFilter | string
     issueDate?: DateTimeWithAggregatesFilter | Date | string
     expiryDate?: DateTimeWithAggregatesFilter | Date | string
   }
@@ -19231,6 +19209,7 @@ export namespace Prisma {
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipCreateNestedManyWithoutPlayerInput
@@ -19249,10 +19228,11 @@ export namespace Prisma {
     photo?: string | null
     gender: string
     position: Postion
-    heathRecordId: string
+    heathRecordId?: string | null
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipUncheckedCreateNestedManyWithoutPlayerInput
@@ -19275,6 +19255,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUpdateManyWithoutPlayerNestedInput
@@ -19293,10 +19274,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUncheckedUpdateManyWithoutPlayerNestedInput
@@ -19315,10 +19297,11 @@ export namespace Prisma {
     photo?: string | null
     gender: string
     position: Postion
-    heathRecordId: string
+    heathRecordId?: string | null
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
   }
@@ -19334,6 +19317,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
   }
@@ -19346,10 +19330,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
   }
@@ -19511,7 +19496,7 @@ export namespace Prisma {
     name: string
     address: string
     city: string
-    province: string
+    province?: string
     postal_code: string
     category: InstitutionCategory
     scholarship?: ScholarshipCreateNestedManyWithoutSponsorInput
@@ -19523,7 +19508,7 @@ export namespace Prisma {
     name: string
     address: string
     city: string
-    province: string
+    province?: string
     postal_code: string
     category: InstitutionCategory
     scholarship?: ScholarshipUncheckedCreateNestedManyWithoutSponsorInput
@@ -19559,7 +19544,7 @@ export namespace Prisma {
     name: string
     address: string
     city: string
-    province: string
+    province?: string
     postal_code: string
     category: InstitutionCategory
   }
@@ -19857,7 +19842,7 @@ export namespace Prisma {
 
   export type HeathRecordCreateInput = {
     id?: string
-    cardNumber: number
+    cardNumber: string
     issueDate: Date | string
     expiryDate: Date | string
     Player?: PlayerCreateNestedOneWithoutHealthRecordInput
@@ -19865,7 +19850,7 @@ export namespace Prisma {
 
   export type HeathRecordUncheckedCreateInput = {
     id?: string
-    cardNumber: number
+    cardNumber: string
     issueDate: Date | string
     expiryDate: Date | string
     Player?: PlayerUncheckedCreateNestedOneWithoutHealthRecordInput
@@ -19873,7 +19858,7 @@ export namespace Prisma {
 
   export type HeathRecordUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: IntFieldUpdateOperationsInput | number
+    cardNumber?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
     Player?: PlayerUpdateOneWithoutHealthRecordNestedInput
@@ -19881,7 +19866,7 @@ export namespace Prisma {
 
   export type HeathRecordUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: IntFieldUpdateOperationsInput | number
+    cardNumber?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
     Player?: PlayerUncheckedUpdateOneWithoutHealthRecordNestedInput
@@ -19889,21 +19874,21 @@ export namespace Prisma {
 
   export type HeathRecordCreateManyInput = {
     id?: string
-    cardNumber: number
+    cardNumber: string
     issueDate: Date | string
     expiryDate: Date | string
   }
 
   export type HeathRecordUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: IntFieldUpdateOperationsInput | number
+    cardNumber?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HeathRecordUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: IntFieldUpdateOperationsInput | number
+    cardNumber?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20546,6 +20531,7 @@ export namespace Prisma {
     phone?: SortOrder
     streetAddress?: SortOrder
     city?: SortOrder
+    province?: SortOrder
     country?: SortOrder
     postalCode?: SortOrder
   }
@@ -20562,6 +20548,7 @@ export namespace Prisma {
     phone?: SortOrder
     streetAddress?: SortOrder
     city?: SortOrder
+    province?: SortOrder
     country?: SortOrder
     postalCode?: SortOrder
   }
@@ -20578,6 +20565,7 @@ export namespace Prisma {
     phone?: SortOrder
     streetAddress?: SortOrder
     city?: SortOrder
+    province?: SortOrder
     country?: SortOrder
     postalCode?: SortOrder
   }
@@ -20998,17 +20986,6 @@ export namespace Prisma {
     endDate?: SortOrder
   }
 
-  export type IntFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntFilter | number
-  }
-
   export type PlayerRelationFilter = {
     is?: PlayerWhereInput | null
     isNot?: PlayerWhereInput | null
@@ -21019,10 +20996,6 @@ export namespace Prisma {
     cardNumber?: SortOrder
     issueDate?: SortOrder
     expiryDate?: SortOrder
-  }
-
-  export type HeathRecordAvgOrderByAggregateInput = {
-    cardNumber?: SortOrder
   }
 
   export type HeathRecordMaxOrderByAggregateInput = {
@@ -21039,11 +21012,12 @@ export namespace Prisma {
     expiryDate?: SortOrder
   }
 
-  export type HeathRecordSumOrderByAggregateInput = {
-    cardNumber?: SortOrder
+  export type CompetitionRelationFilter = {
+    is?: CompetitionWhereInput
+    isNot?: CompetitionWhereInput
   }
 
-  export type IntWithAggregatesFilter = {
+  export type IntFilter = {
     equals?: number
     in?: Enumerable<number>
     notIn?: Enumerable<number>
@@ -21051,17 +21025,7 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: NestedIntWithAggregatesFilter | number
-    _count?: NestedIntFilter
-    _avg?: NestedFloatFilter
-    _sum?: NestedIntFilter
-    _min?: NestedIntFilter
-    _max?: NestedIntFilter
-  }
-
-  export type CompetitionRelationFilter = {
-    is?: CompetitionWhereInput
-    isNot?: CompetitionWhereInput
+    not?: NestedIntFilter | number
   }
 
   export type GameCountOrderByAggregateInput = {
@@ -21094,6 +21058,22 @@ export namespace Prisma {
 
   export type GameSumOrderByAggregateInput = {
     attendance?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntWithAggregatesFilter | number
+    _count?: NestedIntFilter
+    _avg?: NestedFloatFilter
+    _sum?: NestedIntFilter
+    _min?: NestedIntFilter
+    _max?: NestedIntFilter
   }
 
   export type EnumEventFilter = {
@@ -22281,14 +22261,6 @@ export namespace Prisma {
     connect?: PlayerWhereUniqueInput
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type PlayerUpdateOneWithoutHealthRecordNestedInput = {
     create?: XOR<PlayerCreateWithoutHealthRecordInput, PlayerUncheckedCreateWithoutHealthRecordInput>
     connectOrCreate?: PlayerCreateOrConnectWithoutHealthRecordInput
@@ -22391,6 +22363,14 @@ export namespace Prisma {
     upsert?: LocationUpsertWithoutGameInput
     connect?: LocationWhereUniqueInput
     update?: XOR<LocationUpdateWithoutGameInput, LocationUncheckedUpdateWithoutGameInput>
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type TeamUncheckedUpdateManyWithoutGameNestedInput = {
@@ -23012,14 +22992,14 @@ export namespace Prisma {
 
   export type HeathRecordCreateWithoutPlayerInput = {
     id?: string
-    cardNumber: number
+    cardNumber: string
     issueDate: Date | string
     expiryDate: Date | string
   }
 
   export type HeathRecordUncheckedCreateWithoutPlayerInput = {
     id?: string
-    cardNumber: number
+    cardNumber: string
     issueDate: Date | string
     expiryDate: Date | string
   }
@@ -23192,14 +23172,14 @@ export namespace Prisma {
 
   export type HeathRecordUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: IntFieldUpdateOperationsInput | number
+    cardNumber?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HeathRecordUncheckedUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cardNumber?: IntFieldUpdateOperationsInput | number
+    cardNumber?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23382,6 +23362,7 @@ export namespace Prisma {
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipCreateNestedManyWithoutPlayerInput
@@ -23399,10 +23380,11 @@ export namespace Prisma {
     photo?: string | null
     gender: string
     position: Postion
-    heathRecordId: string
+    heathRecordId?: string | null
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipUncheckedCreateNestedManyWithoutPlayerInput
@@ -23496,10 +23478,11 @@ export namespace Prisma {
     photo?: StringNullableFilter | string | null
     gender?: StringFilter | string
     position?: EnumPostionFilter | Postion
-    heathRecordId?: StringFilter | string
+    heathRecordId?: StringNullableFilter | string | null
     phone?: StringFilter | string
     streetAddress?: StringFilter | string
     city?: StringFilter | string
+    province?: StringFilter | string
     country?: StringFilter | string
     postalCode?: StringFilter | string
   }
@@ -23858,6 +23841,7 @@ export namespace Prisma {
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipCreateNestedManyWithoutPlayerInput
@@ -23875,10 +23859,11 @@ export namespace Prisma {
     photo?: string | null
     gender: string
     position: Postion
-    heathRecordId: string
+    heathRecordId?: string | null
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipUncheckedCreateNestedManyWithoutPlayerInput
@@ -23898,7 +23883,7 @@ export namespace Prisma {
     name: string
     address: string
     city: string
-    province: string
+    province?: string
     postal_code: string
     category: InstitutionCategory
     scholarship?: ScholarshipCreateNestedManyWithoutSponsorInput
@@ -23909,7 +23894,7 @@ export namespace Prisma {
     name: string
     address: string
     city: string
-    province: string
+    province?: string
     postal_code: string
     category: InstitutionCategory
     scholarship?: ScholarshipUncheckedCreateNestedManyWithoutSponsorInput
@@ -24354,6 +24339,7 @@ export namespace Prisma {
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipCreateNestedManyWithoutPlayerInput
@@ -24375,6 +24361,7 @@ export namespace Prisma {
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipUncheckedCreateNestedManyWithoutPlayerInput
@@ -24406,6 +24393,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUpdateManyWithoutPlayerNestedInput
@@ -24427,6 +24415,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUncheckedUpdateManyWithoutPlayerNestedInput
@@ -24635,6 +24624,7 @@ export namespace Prisma {
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipCreateNestedManyWithoutPlayerInput
@@ -24652,10 +24642,11 @@ export namespace Prisma {
     photo?: string | null
     gender: string
     position: Postion
-    heathRecordId: string
+    heathRecordId?: string | null
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipUncheckedCreateNestedManyWithoutPlayerInput
@@ -24710,6 +24701,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUpdateManyWithoutPlayerNestedInput
@@ -24727,10 +24719,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUncheckedUpdateManyWithoutPlayerNestedInput
@@ -24768,7 +24761,7 @@ export namespace Prisma {
     name: string
     address: string
     city: string
-    province: string
+    province?: string
     postal_code: string
     category: InstitutionCategory
     Squad?: SquadCreateNestedManyWithoutInstitutionInput
@@ -24779,7 +24772,7 @@ export namespace Prisma {
     name: string
     address: string
     city: string
-    province: string
+    province?: string
     postal_code: string
     category: InstitutionCategory
     Squad?: SquadUncheckedCreateNestedManyWithoutInstitutionInput
@@ -24802,6 +24795,7 @@ export namespace Prisma {
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     recruitment?: RecruitmentCreateNestedManyWithoutPlayerInput
@@ -24819,10 +24813,11 @@ export namespace Prisma {
     photo?: string | null
     gender: string
     position: Postion
-    heathRecordId: string
+    heathRecordId?: string | null
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     recruitment?: RecruitmentUncheckedCreateNestedManyWithoutPlayerInput
@@ -24881,6 +24876,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     recruitment?: RecruitmentUpdateManyWithoutPlayerNestedInput
@@ -24898,10 +24894,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     recruitment?: RecruitmentUncheckedUpdateManyWithoutPlayerNestedInput
@@ -25021,6 +25018,7 @@ export namespace Prisma {
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipCreateNestedManyWithoutPlayerInput
@@ -25038,10 +25036,11 @@ export namespace Prisma {
     photo?: string | null
     gender: string
     position: Postion
-    heathRecordId: string
+    heathRecordId?: string | null
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipUncheckedCreateNestedManyWithoutPlayerInput
@@ -25126,6 +25125,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUpdateManyWithoutPlayerNestedInput
@@ -25143,10 +25143,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUncheckedUpdateManyWithoutPlayerNestedInput
@@ -25271,6 +25272,7 @@ export namespace Prisma {
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipCreateNestedManyWithoutPlayerInput
@@ -25288,10 +25290,11 @@ export namespace Prisma {
     photo?: string | null
     gender: string
     position: Postion
-    heathRecordId: string
+    heathRecordId?: string | null
     phone: string
     streetAddress: string
     city: string
+    province?: string
     country?: string
     postalCode: string
     scholarship?: ScholarshipUncheckedCreateNestedManyWithoutPlayerInput
@@ -25349,6 +25352,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUpdateManyWithoutPlayerNestedInput
@@ -25366,10 +25370,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUncheckedUpdateManyWithoutPlayerNestedInput
@@ -25642,6 +25647,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUpdateManyWithoutPlayerNestedInput
@@ -25659,10 +25665,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUncheckedUpdateManyWithoutPlayerNestedInput
@@ -25680,10 +25687,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
   }
@@ -25854,6 +25862,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUpdateManyWithoutPlayerNestedInput
@@ -25871,10 +25880,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     scholarship?: ScholarshipUncheckedUpdateManyWithoutPlayerNestedInput
@@ -25892,10 +25902,11 @@ export namespace Prisma {
     photo?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
     position?: EnumPostionFieldUpdateOperationsInput | Postion
-    heathRecordId?: StringFieldUpdateOperationsInput | string
+    heathRecordId?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     streetAddress?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
+    province?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
   }

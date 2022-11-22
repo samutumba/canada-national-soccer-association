@@ -14,7 +14,7 @@ import Image from "next/image";
 
 const formSchema = Yup.object().shape({
     username: Yup.string()
-      .required('Username is mandatory'),
+    .required('Username is mandatory').min(5, 'Username must be atleast 5 characters long'),
     password: Yup.string()
       .required('Password is mandatory')
       .min(6, 'Password must be at 6 characters long'),
