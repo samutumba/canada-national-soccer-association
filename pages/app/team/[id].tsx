@@ -5,13 +5,15 @@ import { client } from "../../../lib/prisma";
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 
-const Home: NextPage = ({ team }) => {
+
+const Home: NextPage = ({ }) => {
+  
   
  return (<DashboardLayout>
   <div className="flex flex-row gap-4 items-center">
    <span className="p-3 bg-white rounded-full">
    </span>
-   <PageTitle title="Durham Lords" description="Oshawa, ON" />
+   <PageTitle title="" description="Oshawa, ON" />
   </div>
   <div className="flex flex-row first-letter:flex-wrap gap-4 m-4">
    <span className="shadow-lg items-center rounded-lg bg-green-900 p-4 flex flex-row gap-4">
@@ -57,21 +59,5 @@ const Home: NextPage = ({ team }) => {
 )
 }
 
-export const getServerSideProps: GetServerSideProps<{team: Team}> = async (context) => {
-
-  const { id } = context.params
-
-  const team = await client.team.findFirst({
-    where: {
-      id
-    }
-  });
-  
-  return {
-    props: {
-      team,
-    }, // will be passed to the page component as props
-  }
-}
 
 export default Home;

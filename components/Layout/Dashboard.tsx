@@ -24,13 +24,13 @@ export const DashboardLayout = ({ children }: {
             </span>
             <label htmlFor="my-drawer-2" className="lg:hidden"><Icon icon="charm:menu-hamburger" /></label>
           </nav>
-          <div className='p-4 bg-slate-100 flex-col w-full h-full'>
+          <div className='p-4  flex flex-col w-full min-h-screen h-full'>
             {children}
           </div>
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-3 rounded-r-3xl col gap-4 font-semibold mx-2 overflow-y-auto w-80 bg-white flex-wrap  text-slate-400">
+          <ul className="menu p-3 rounded-r-3xl col gap-4 font-semibold mx-2 overflow-y-auto w-80 bg-slate-50 flex-wrap  text-slate-400">
             <li>
 
               <div className="flex flex-col gap-2 justify-center">

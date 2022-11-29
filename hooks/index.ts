@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import Cookies from "js-cookie"
-import { client } from "../lib/prisma"
-import { Location, Player }from '../prisma/generated/prisma-client-js'
+import { Location, Player, Team, Institution, Squad, Game, GameEvent }from '../prisma/generated/prisma-client-js'
 
 export const useUser = () => {
  return useQuery(['useUser'], () => {
@@ -27,7 +26,7 @@ export const useLocations = () => {
 export const usePlayers = () => {
  return useQuery<Player[], unknown>(['players'], async () => {
 
-  const response = await axios.get('http://localhost:3000/api/data/player', {
+  const response = await axios.get('/api/data/player', {
    headers: {
     authorization: Cookies.get('auth')
    }
@@ -37,23 +36,51 @@ export const usePlayers = () => {
  })
 }
 
-// export const useTeams = () => {
-//  return useQuery(['teams'], async () => {
-//   await client.$connect()
-//   const teams = await client.team.findMany()
-//   await client.$disconnect()
-//   return teams
-//  })
-// }
+export const useTeams = () => {
+ return useQuery<(Team & {
+  Game: Game | null;
+  starters: Player[];
+  squad: Squad;
+ })[], unknown>(['teams'], async () => {
+  const response = await axios.get('/api/data/team', {
+   headers: {
+    authorization: Cookies.get('auth')
+   },
+  });
+  
+  return response.data.teams
+ })
 
-// export const useInstitutions = () => {
-//  return useQuery(['institutions'], async () => {
-//   await client.$connect()
-//   const locations = await client.institution.findMany()
-//   await client.$disconnect()
-//   return locations
-//  })
-// }
+ 
+}
+
+export const useInstitutions = () => {
+ return useQuery<(Institution & { Squad: Squad[] })[], unknown>(['institutions'], async () => {
+  const response = await axios.get('/api/data/institution', {
+   headers: {
+    authorization: Cookies.get('auth')
+   },
+  });
+
+  return response.data.institutions
+ })
+}
+
+export const useGames = () => {
+ return useQuery<(Game & {
+ events: GameEvent[];
+  team: Team[];
+  location: Location;
+ })[], unknown>(['games'], async () => {
+  const response = await axios.get('/api/data/game', {
+   headers: {
+    authorization: Cookies.get('auth')
+   },
+  });
+
+  return response.data.games
+ })
+}
 
 // export const useCompetitions = () => {
 //  return useQuery(['competitions'], async () => {
@@ -68,3 +95,8 @@ export const usePlayers = () => {
 //   return locations
 //  })
 // }
+
+//(Game & {
+// events: GameEvent[];
+// team: Team[];
+// })[]
