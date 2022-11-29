@@ -1,10 +1,12 @@
 import { NextPage } from "next";
 import { DashboardLayout, PageTitle  } from "../../../components"
 import { Icon } from '@iconify/react';
+import { client } from "../../../lib/prisma";
+import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 
-
-const Home: NextPage = () => {
-
+const Home: NextPage = ({ team }) => {
+  
  return (<DashboardLayout>
   <div className="flex flex-row gap-4 items-center">
    <span className="p-3 bg-white rounded-full">
@@ -53,6 +55,23 @@ const Home: NextPage = () => {
   </div>
  </DashboardLayout>
 )
+}
+
+export const getServerSideProps: GetServerSideProps<{team: Team}> = async (context) => {
+
+  const { id } = context.params
+
+  const team = await client.team.findFirst({
+    where: {
+      id
+    }
+  });
+  
+  return {
+    props: {
+      team,
+    }, // will be passed to the page component as props
+  }
 }
 
 export default Home;

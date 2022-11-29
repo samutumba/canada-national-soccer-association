@@ -1,8 +1,7 @@
 import { Dialog } from "@mui/material";
 import { useState } from "react";
-import { Player, Postion, Prisma, } from "../../../prisma/generated/prisma-client-js";
+import { Player, Prisma } from "../../../prisma/generated/prisma-client-js";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from 'yup'
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
@@ -14,39 +13,48 @@ import { PlayerCreateInputObjectSchema } from "../../../validators/schemas/inter
 import { create }  from '../../../interfaces'
 import _ from "lodash";
 
-import { SelectInput, DateInput, MobileInput } from "../Input";
+import { SelectInput, DateInput, MobileInput, TextInput } from "../Input";
 import Cookies from "js-cookie";
+import moment from "moment";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 export const PlayerForm = ({ player, children }: { player?: Player, children: React.ReactNode}) => {
   const [open, setOpen] = useState(false)
   const setLoading = useSetRecoilState(loadingState)
+  const queryClient = useQueryClient()
 
- const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm <create.Player>({
+  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<Prisma.PlayerCreateInput>({
   mode: "onTouched",
   resolver: yupResolver(PlayerCreateInputObjectSchema),
-  defaultValues: {
-   name: player?.name || faker.name.findName(),
-   dob: player?.dob || faker.date.between('1995-01-01T00:00:00.000Z', '2004-01-01T00:00:00.000Z') ,
-   isDomestic: player?.isDomestic || true,
-   photo: player?.photo || faker.image.avatar(),
-   gender: player?.gender || faker.helpers.arrayElement(['male', 'female']), 
-   position: Object.values(create.Postion).filter((p)=> {
-    if (p.toString() == player?.position.toString()) {
-     return p
+    defaultValues: {
+      name: player?.name || faker.name.findName(),
+      dob: player?.dob || faker.date.between('1995-01-01T00:00:00.000Z', '2004-01-01T00:00:00.000Z'),
+      isDomestic: player?.isDomestic || true,
+      photo: player?.photo || faker.image.avatar(),
+      gender: player?.gender || 'male',
+      position: Object.values(create.Postion).filter((p) => {
+        if (p.toString() == player?.position.toString()) {
+          return p
+        }
+      }).at(0) || faker.helpers.arrayElement(Object.values(create.Postion)),
+      phone: player?.phone || faker.phone.number('+1##########'),
+      streetAddress: player?.streetAddress || faker.address.streetAddress(),
+      city: player?.streetAddress || faker.address.city(),
+      //////province: player?.streetAddress || 'ON',
+      country: player?.streetAddress || 'ca',
+      postalCode: player?.postalCode || faker.address.zipCode(),
+      healthRecord: {
+        create: {
+          issueDate: faker.date.between('2017-01-01T00:00:00.000Z', moment().toString()),
+          expiryDate: faker.date.between(moment().toString(), '2030-01-01T00:00:00.000Z'),
+          cardNumber: faker.random.numeric(10),
+        },
+      }
     }
-   }).at(0) || faker.helpers.arrayElement(Object.values(create.Postion)),
-   heathRecordId: player?.heathRecordId,
-    phone: player?.phone || faker.phone.number('+1##########'),
-   streetAddress: player?.streetAddress || faker.address.streetAddress(),
-   city: player?.streetAddress || faker.address.city(),
-   province: player?.streetAddress || "ON",
-   country: player?.streetAddress || 'ca',
-   postalCode: player?.postalCode || faker.address.zipCode(),
-  }
- });
+});
 
-  const onSubmit = (data: create.Player) => {
+  const onSubmit = (data: Prisma.PlayerCreateInput) => {
 
     setLoading(true);
     setOpen(!open);
@@ -54,12 +62,22 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
     console.log(data);
 
     const tokenCookie = Cookies.get('auth')
-    axios.post('/api/player', data, {
+    axios.post('/api/player', {
+      ...data,
+      healthRecord: {
+        create: {
+          cardNumber: parseInt(data.healthRecord?.create?.cardNumber ? data.healthRecord?.create?.cardNumber : "123123"),
+          issueDate: data.healthRecord?.create?.issueDate,
+          expiryDate: data.healthRecord?.create?.expiryDate
+        }
+      }
+    }, {
       headers: {
         authorization: tokenCookie
       }
     }).then(res => {
       setLoading(false);
+      queryClient.invalidateQueries(['players'])
       toast.success(player ? "Player Updated" : "Player Created");
     }).catch(err => {
       setLoading(false);
@@ -84,7 +102,11 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
     <form onSubmit={handleSubmit(onSubmit)} className="flex mt-3 flex-col gap-2 w-full max-w-lg justify-center">
      <h1>{ player ? "Update Player" : "Create Player"}</h1>
      <label>Name</label>
-     <input type="text" className={ errors.name ? 'input-error' : 'input-okay'} {...register('name')} />
+         <input
+           type="text"
+           className={errors.name ? 'input-error' : 'input-okay'}
+           {...register('name')}
+         />
      <ErrorMessage data={errors.name} />
      
          <DateInput name="Date of Birth" error={errors.dob} value={watch('dob')} callback={(v) => {
@@ -108,7 +130,7 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
              let postion: create.Postion = create.Postion.winger
 
              Object.values(create.Postion).forEach((p, i) => {
-               if (p.toString() == "v") {
+               if (p.toString() == v) {
                  postion = p
                }
              });
@@ -134,14 +156,14 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
 
          <SelectInput
            name="Province"
-           options={[{ label: 'Ontario', value: "ON" },
+           options={[{ label: 'Ontario', value: 'ON'},
          { label: 'British Columbia', value: "BC" },
          { label: 'Alberta', value: "AL" },
          { label: 'Nova Soctia', value: "NS" },
          { label: 'Manitoba', value: "MA" },
          { label: 'Quebec', value: "QC" }
          ]}
-           callback={(v) => setValue('province', v)}
+           callback={(v) => { setValue('province', v) }}
            error={errors.province}
      />
 
@@ -176,6 +198,15 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
      <label>Postal Code</label>
      <input type="text" className={errors.postalCode ? 'input-error' : 'input-okay'} {...register('postalCode')} />
      <ErrorMessage data={errors.postalCode} />
+
+         <TextInput type="number" name="Health Card Number" register={register('healthRecord.create.cardNumber')} error={errors?.healthRecord?.create?.cardNumber} />
+         <DateInput name="Issue Date" value={watch("healthRecord.create.issueDate")} callback={(v) => {
+           setValue("healthRecord.create.issueDate", v)
+         }} />
+         <DateInput name="Expiry Date" value={watch("healthRecord.create.expiryDate")} callback={(v) => {
+           setValue("healthRecord.create.expiryDate", v)
+         }} />
+         
       <button className="btn-main">
         {player ? "Update" : "Create"}
       </button>

@@ -28,7 +28,7 @@ module.exports = {
         'corner': "url('/images/corner.jpg')",
         'kick': "url('/images/bicycle-kick.jpg')",
         'david': "url('/images/david-davies.jpeg')",
-        'other': "",
+        'uclcross': "url('/images/uclcross.jpg')",
       }
     },
   },

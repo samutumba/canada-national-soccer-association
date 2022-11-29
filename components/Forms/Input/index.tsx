@@ -1,18 +1,19 @@
-import { UseFormRegister, FieldError, FieldValues, } from "react-hook-form"
+import { UseFormRegister, FieldError, FieldValues, UseFormRegisterReturn } from "react-hook-form"
 import Select, { ActionMeta, SingleValue } from "react-select"
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 //import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
-export const TextInput = ({ name, register, error }: {
+export const TextInput = ({ name, register, error, type }: {
+  type?: 'password' | 'text' | 'number',
  name: string,
- register: UseFormRegister<FieldValues>,
+  register: UseFormRegisterReturn<any>,
  error?: FieldError | undefined,
 }) => {
  return (<>
   <label>{name}</label>
-  <input type="text" className={error ? 'input-error' : 'input-okay'} {...register(name)} />
+  <input type={type ? type : "text"} className={error ? 'input-error' : 'input-okay'} {...register} />
   <ErrorMessage data={error} />
  </>)
 }

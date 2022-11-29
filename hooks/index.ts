@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import Cookies from "js-cookie"
 import { client } from "../lib/prisma"
-import { Location }from '../prisma/generated/prisma-client-js'
+import { Location, Player }from '../prisma/generated/prisma-client-js'
 
 export const useUser = () => {
  return useQuery(['useUser'], () => {
@@ -20,6 +20,20 @@ export const useLocations = () => {
   })
 
   return response.data.locations
+ })
+}
+
+
+export const usePlayers = () => {
+ return useQuery<Player[], unknown>(['players'], async () => {
+
+  const response = await axios.get('http://localhost:3000/api/data/player', {
+   headers: {
+    authorization: Cookies.get('auth')
+   }
+  })
+
+  return response.data.players
  })
 }
 

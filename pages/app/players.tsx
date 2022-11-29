@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import React from "react";
 import Head from "next/head";
 import { PlayerForm } from "../../components/Forms/Player/Create";
+import { Icon } from "@iconify/react";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -53,29 +54,21 @@ const Home: NextPage = () => {
       <title>Players - CNSA</title>
     </Head>
   <PageTitle title="Players" description="Look for the next big thing" />
-  <div className="bg-slate-200 m-1 p-3 w-full flex flex-col gap-2 h-full rounded-lg">
-   <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-   <Tabs value={value} onChange={handleChange} aria-label="Player tabs">
-     
-          <Tab label="Explore players" {...a11yProps(0)} />
-          <Tab label="My Scout List" {...a11yProps(1)} />
-          <Tab label="Statistics" {...a11yProps(2)} />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={0}>
-        <SearchPlayers />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <PlayerForm >
-          <span>
-            Create Player
-          </span>
-        </PlayerForm>
-      </TabPanel>
-  </div>
+    <>
+      <div className="flex flex-col mt-2 lg:flex-row border rounded-xl h-[35rem] bg-uclcross mx-auto bg-cover bg-bottom text-white max-w-screen-2xl w-full items-center">
+        <span className="bg-gradient-to-r justify-center h-full flex flex-col text-left gap-4 items-left from-black self-bottom rounded-l-2xl pl-7 pb-12 w-full lg:w-2/3">
+          <h1 className="text-5xl">The Stars</h1>
+          <p>The Players that make the magic happen on the field </p>
+          <PlayerForm>
+            <span className="max-w-sm text-center gap-4 p-3 rounded-xl bg-primary text-white flex flex-row w-full">
+              <Icon icon="game-icons:soccer-field" className="text-2xl" /> Create New
+            </span>
+          </PlayerForm>
+        </span>
+      </div>
+
+      <SearchPlayers />
+    </>
  </DashboardLayout>
 )
 }

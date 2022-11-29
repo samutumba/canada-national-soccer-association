@@ -13,12 +13,12 @@ export default async function handler(
   try {
    switch (req.method) {
      case 'POST':
-       const { name, dob, isDomestic, gender, position, phone, streetAddress, city, province, country, postalCode, id } = req.body
 
+       console.log("Here");
+       console.log(req.body, "/n")
+       //console.log(req.body(), "/n")
        const player = await client.player.create({
-         data: {
-           ...req.body
-         },
+         data: req.body
        });
 
        res.status(httpStatus.OK).json({
@@ -36,6 +36,7 @@ export default async function handler(
       return res.status(httpStatus.BAD_GATEWAY).json({ message: `${req.method} is not valid` })
     }
   } catch (error) {
+    console.log("\n\n",error)
    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
      error
      
