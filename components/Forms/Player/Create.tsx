@@ -1,13 +1,12 @@
 import { Dialog } from "@mui/material";
 import { useState } from "react";
-import { Player, Postion, Prisma} from "../../../prisma/generated/prisma-client-js";
+import { Player, Postion, Prisma, } from "../../../prisma/generated/prisma-client-js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from 'yup'
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 import { loadingState } from "../../../atoms";
 import { FieldError, useForm } from "react-hook-form";
 import { faker } from '@faker-js/faker/locale/en_CA';
@@ -23,7 +22,7 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
   const [open, setOpen] = useState(false)
   const setLoading = useSetRecoilState(loadingState)
 
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<Prisma.PlayerCreateInput>({
+ const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm <create.Player>({
   mode: "onTouched",
   resolver: yupResolver(PlayerCreateInputObjectSchema),
   defaultValues: {
@@ -37,7 +36,7 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
      return p
     }
    }).at(0) || faker.helpers.arrayElement(Object.values(create.Postion)),
-   
+   heathRecordId: player?.heathRecordId,
     phone: player?.phone || faker.phone.number('+1##########'),
    streetAddress: player?.streetAddress || faker.address.streetAddress(),
    city: player?.streetAddress || faker.address.city(),
@@ -47,7 +46,7 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
   }
  });
 
-  const onSubmit = (data: Prisma.PlayerCreateInput) => {
+  const onSubmit = (data: create.Player) => {
 
     setLoading(true);
     setOpen(!open);
