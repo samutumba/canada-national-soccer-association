@@ -9,7 +9,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
  switch (req.method){
-  case 'POST':
+   case 'POST':
+     const { body } = req.body
+
+     
     return res.status(200).json({ name: 'John Doe' });
    case "GET":
      await client.$connect()

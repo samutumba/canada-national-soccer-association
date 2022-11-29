@@ -29,5 +29,10 @@
     "**/.vscode/**"
   ],
   "WillLuke.nextjs.addTypesOnSave": true,
-  "WillLuke.nextjs.hasPrompted": true
+  "WillLuke.nextjs.hasPrompted": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
+  "eslint.rules.customizations": [
+  
+  ]
 }

@@ -26,6 +26,8 @@ generator yup {
 
 generator dbml {
   provider = "prisma-dbml-generator"
+   output     = "../dbml"
+  outputName = "awesome.dbml"
 }
 
 model Player {

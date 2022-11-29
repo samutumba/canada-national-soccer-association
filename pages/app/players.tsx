@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import React from "react";
 import Head from "next/head";
+import { PlayerForm } from "../../components/Forms/Player/Create";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -68,7 +69,11 @@ const Home: NextPage = () => {
         Item Two
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <PlayerForm >
+          <span>
+            Create Player
+          </span>
+        </PlayerForm>
       </TabPanel>
   </div>
  </DashboardLayout>

@@ -1,0 +1,337 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Player {
+  id String [pk]
+  name String [not null]
+  dob DateTime [not null]
+  isDomestic Boolean [not null, default: true]
+  photo String
+  gender String [not null]
+  position Postion [not null]
+  healthRecord HeathRecord
+  heathRecordId String [unique]
+  phone String [not null]
+  streetAddress String [not null]
+  city String [not null]
+  province String [not null, default: 'ON']
+  country String [not null, default: 'ca']
+  postalCode String [not null]
+  scholarship Scholarship [not null]
+  recruitment Recruitment [not null]
+  GameEvent GameEvent [not null]
+  Injury Injury [not null]
+  Squad Squad [not null]
+  Team Team [not null]
+}
+
+Table Team {
+  id String [pk]
+  starters Player [not null]
+  formation Formation [not null]
+  shirtColor String [not null]
+  squad Squad [not null]
+  squadId String [not null]
+  Game Game
+  gameId String
+}
+
+Table Staff {
+  id String [pk]
+  name String [not null]
+  dob DateTime [not null]
+  phone String [not null]
+  role Role [not null]
+  streetAddress String [not null]
+  city String [not null]
+  country String [not null, default: 'Canada']
+  postalCode String [not null]
+  account Account
+  accountId String
+  Squad Squad [not null]
+}
+
+Table Institution {
+  id String [pk]
+  name String [unique, not null]
+  address String [not null]
+  city String [not null]
+  province String [not null, default: 'ON']
+  postal_code String [not null]
+  category InstitutionCategory [not null]
+  scholarship Scholarship [not null]
+  Squad Squad [not null]
+}
+
+Table Location {
+  id String [pk]
+  name String [not null]
+  category LocationCategory [not null]
+  streetAddress String [not null]
+  city String [not null]
+  province String [not null, default: 'ON']
+  country String [not null, default: 'ca']
+  postalCode String [not null]
+  game Game [not null]
+  Squad Squad [not null]
+}
+
+Table Squad {
+  id String [pk]
+  name String [not null]
+  players Player [not null]
+  institution Institution [not null]
+  staff Staff [not null]
+  competition Competition [not null]
+  institutionId String [not null]
+  home Location
+  homeColor String
+  awayColor String
+  Team Team [not null]
+  locationId String
+}
+
+Table Competition {
+  id String [pk]
+  name String [not null]
+  sponsor String [not null]
+  type CompetitionType [not null, default: 'TOURNAMENT']
+  season Season [not null]
+  seasonId String [not null]
+  Squad Squad [not null]
+  Game Game [not null]
+}
+
+Table Season {
+  id String [pk]
+  startDate DateTime [default: `now()`, not null]
+  endDate DateTime [not null]
+  Competition Competition [not null]
+}
+
+Table HeathRecord {
+  id String [pk]
+  cardNumber String [unique, not null]
+  issueDate DateTime [not null]
+  expiryDate DateTime [not null]
+  Player Player
+}
+
+Table Game {
+  id String [pk]
+  team Team [not null]
+  events GameEvent [not null]
+  competition Competition [not null]
+  updatedAt DateTime [not null]
+  location Location [not null]
+  attendance Int [not null]
+  locationId String [not null]
+  competitionId String [not null]
+}
+
+Table GameEvent {
+  id String [pk]
+  player Player [not null]
+  minute Int [not null]
+  game Game
+  gameId String
+  playerId String [not null]
+  type Event [not null]
+}
+
+Table Scholarship {
+  id String [pk]
+  name String [not null]
+  description String [not null]
+  sponsor Institution [not null]
+  player Player [not null]
+  institutionId String [not null]
+  playerId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Account {
+  id String [pk]
+  username String [unique, not null]
+  password String [not null]
+  updatedAt DateTime [not null]
+  createdAt DateTime [default: `now()`, not null]
+  recruitment Recruitment [not null]
+  Staff Staff [not null]
+}
+
+Table Recruitment {
+  id String [pk]
+  player Player [not null]
+  recruiter Account [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  passed Boolean [not null, default: false]
+  interviews Interview [not null]
+  resume String
+  playerId String [not null]
+  accountId String [not null]
+}
+
+Table Interview {
+  id String [pk]
+  stage Stage [not null, default: 'First']
+  passed Boolean [not null, default: false]
+  at DateTime [not null]
+  Recruitment Recruitment [not null]
+  comment String [not null]
+  recruitmentId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Injury {
+  id String [pk]
+  player Player [not null]
+  playerId String [not null]
+  Operation Operation [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Operation {
+  id String [pk]
+  type String [not null]
+  injury Injury [not null]
+  date DateTime [default: `now()`, not null]
+  injuryId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table PlayerToSquad {
+  squadId String [ref: > Squad.id]
+  playersId String [ref: > Player.id]
+}
+
+Table PlayerToTeam {
+  teamId String [ref: > Team.id]
+  startersId String [ref: > Player.id]
+}
+
+Table SquadToStaff {
+  squadId String [ref: > Squad.id]
+  staffId String [ref: > Staff.id]
+}
+
+Table CompetitionToSquad {
+  competitionId String [ref: > Competition.id]
+  squadId String [ref: > Squad.id]
+}
+
+Enum Formation {
+  F4_4_2
+  F4_2_3_1
+  F3_5_2
+  F5_3_2
+  F3_4_3
+  F4_3_3
+}
+
+Enum Role {
+  head_coach
+  doctor
+  therapist
+  recruiter
+  coach
+  nurse
+  kitman
+  referee
+  lawyer
+  teacher
+  other
+}
+
+Enum InstitutionCategory {
+  high_school
+  middle_school
+  college
+  university
+  semi_pro
+  amateur
+  pro
+}
+
+Enum LocationCategory {
+  field
+  stadium
+  park
+  other
+}
+
+Enum CompetitionType {
+  TOURNAMENT
+  LEAGUE
+  FRIENDLY
+}
+
+Enum Event {
+  goal
+  assist
+  yellow_card
+  red_card
+  substitution_off
+  substitution_on
+}
+
+Enum Stage {
+  First
+  Second
+  Third
+}
+
+Enum Postion {
+  goal_keeper
+  right_back
+  center_back
+  left_back
+  defensive_midfielder
+  central_midfielder
+  attacking_midfielder
+  winger
+  striker
+  wing_back
+}
+
+Ref: Player.heathRecordId - HeathRecord.id
+
+Ref: Team.squadId > Squad.id
+
+Ref: Team.gameId > Game.id
+
+Ref: Staff.accountId > Account.id
+
+Ref: Squad.institutionId > Institution.id
+
+Ref: Squad.locationId > Location.id
+
+Ref: Competition.seasonId > Season.id
+
+Ref: Game.competitionId > Competition.id
+
+Ref: Game.locationId > Location.id
+
+Ref: GameEvent.playerId > Player.id
+
+Ref: GameEvent.gameId > Game.id
+
+Ref: Scholarship.institutionId > Institution.id
+
+Ref: Scholarship.playerId > Player.id
+
+Ref: Recruitment.playerId > Player.id
+
+Ref: Recruitment.accountId > Account.id
+
+Ref: Interview.recruitmentId > Recruitment.id
+
+Ref: Injury.playerId > Player.id
+
+Ref: Operation.injuryId > Injury.id
