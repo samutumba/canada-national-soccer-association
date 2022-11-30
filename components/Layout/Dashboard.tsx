@@ -9,7 +9,7 @@ import moment from 'moment';
 import Image from 'next/image';
 
 export const DashboardLayout = ({ children }: {
-  children: React.ReactNode,
+  children: React.ReactNode | React.ReactNode[],
 }) => {
   const user = useRecoilValue(UserState)
 
