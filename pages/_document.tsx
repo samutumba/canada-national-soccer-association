@@ -1,4 +1,4 @@
-import Document, {
+import NextDocument, {
   Html,
   Head,
   Main,
@@ -6,7 +6,7 @@ import Document, {
 } from 'next/document'
 import React from 'react'
 
-class MyDocument extends Document {
+class MyDocument extends NextDocument {
 
   render() {
     return (

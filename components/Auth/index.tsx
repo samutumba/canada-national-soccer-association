@@ -5,8 +5,7 @@ import { toast } from "react-hot-toast"
 import { useRecoilState, useSetRecoilState } from "recoil"
 import { loadingState, UserState } from "../../atoms"
 import axios from "axios"
-import Cookies from 'js-cookie'
-
+import { getCookie } from "cookies-next"
 
 export const NonAuthRestricted = ({ children }: {
   children: React.ReactNode,
@@ -19,7 +18,7 @@ export const NonAuthRestricted = ({ children }: {
 
     if (!user) {
         setLoading(true)
-    const token = Cookies.get('auth')
+      const token = getCookie('auth')
     axios.get('/api/user', {
       headers: {
         authorization: token
@@ -59,7 +58,7 @@ export const AuthRestricted = ({ children }: {
 
     !user &&
     setLoading(true)
-    const tokenCookie = Cookies.get('auth')
+    const tokenCookie = getCookie('auth')
     axios.get('/api/user', {
       headers: {
         authorization: tokenCookie
@@ -77,10 +76,10 @@ export const AuthRestricted = ({ children }: {
   }, [router, setLoading, setUser, user])
 
  if (!user) {
-  return <>{children}</>
+  return(<>{children}</>)
  }
 
-  return <></>
+  return (<></>)
 
  
 }

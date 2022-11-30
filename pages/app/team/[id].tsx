@@ -6,7 +6,7 @@ import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 
 
-const Home: NextPage = ({ }) => {
+const Home: NextPage = () => {
   
   
  return (<DashboardLayout>

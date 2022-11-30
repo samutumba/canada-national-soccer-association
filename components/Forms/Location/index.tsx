@@ -12,7 +12,7 @@ import { loadingState } from "../../../atoms";
 import { useForm } from "react-hook-form";
 import Select from 'react-select';
 import { faker } from '@faker-js/faker/locale/en_CA';
-import Cookies from "js-cookie";
+import { getCookie } from 'cookies-next';
 import { useQueryClient } from '@tanstack/react-query'
 
 
@@ -76,7 +76,7 @@ export const LocationForm = ({ location, children }: { location?: Location, chil
     if (location) {
       axios.patch('/api/data/location', data, {
         headers: {
-          authorization: Cookies.get('auth')
+          authorization: getCookie('auth')
         }
       }).then((res) => {
         toast.success(res.data.message);
@@ -91,7 +91,7 @@ export const LocationForm = ({ location, children }: { location?: Location, chil
     } else {
        axios.post('/api/data/location', data, {
         headers: {
-          authorization: Cookies.get('auth')
+           authorization: getCookie('auth')
         }
       }).then((res) => {
         toast.success(res.data.message)
@@ -132,7 +132,7 @@ export const LocationForm = ({ location, children }: { location?: Location, chil
            options={categories.flatMap(c => { return { label: c, value: c } })}
            className="capitalize"
            defaultValue={categories.flatMap(c => { return { label: c, value: c } }).at(0)}
-           onChange={ (value,) =>  value?.value && setValue('category', value.value)} />
+           onChange={ (value, a) =>  value?.value && setValue('category', value.value)} />
          {errors.category && <span className="error">{ errors.category.message }</span>}
 
 

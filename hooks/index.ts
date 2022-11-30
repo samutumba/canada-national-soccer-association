@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
-import Cookies from "js-cookie"
+import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
 import { Location, Player, Team, Institution, Squad, Game, GameEvent }from '../prisma/generated/prisma-client-js'
 
 export const useUser = () => {
@@ -14,7 +14,7 @@ export const useLocations = () => {
   
   const response = await axios.get('http://localhost:3000/api/data/location', {
    headers: {
-    authorization: Cookies.get('auth')
+    authorization: getCookie('auth')
    }
   })
 
@@ -28,7 +28,7 @@ export const usePlayers = () => {
 
   const response = await axios.get('/api/data/player', {
    headers: {
-    authorization: Cookies.get('auth')
+    authorization: getCookie('auth')
    }
   })
 
@@ -44,7 +44,7 @@ export const useTeams = () => {
  })[], unknown>(['teams'], async () => {
   const response = await axios.get('/api/data/team', {
    headers: {
-    authorization: Cookies.get('auth')
+    authorization: getCookie('auth')
    },
   });
   
@@ -58,7 +58,7 @@ export const useInstitutions = () => {
  return useQuery<(Institution & { Squad: Squad[] })[], unknown>(['institutions'], async () => {
   const response = await axios.get('/api/data/institution', {
    headers: {
-    authorization: Cookies.get('auth')
+    authorization: getCookie('auth')
    },
   });
 
@@ -74,7 +74,7 @@ export const useGames = () => {
  })[], unknown>(['games'], async () => {
   const response = await axios.get('/api/data/game', {
    headers: {
-    authorization: Cookies.get('auth')
+    authorization: getCookie('auth')
    },
   });
 

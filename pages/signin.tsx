@@ -9,7 +9,6 @@ import { useSetRecoilState } from "recoil";
 import { loadingState } from "../atoms";
 import { AuthRestricted } from "../components";
 import axios from "axios";
-import Cookies from 'js-cookie'
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
@@ -50,7 +49,7 @@ const SignInPage: NextPage = () => {
 
     axios.post('/api/login', data).then((res) => {
       setLoading(false);
-      Cookies.set("auth", res.data.token, { expires: 1 })
+      setCookie("auth", res.data.token, { expires: 1 })
       toast.success("Welcome")
       router.push('/app');
     }).catch((err) => {
@@ -73,7 +72,7 @@ const SignInPage: NextPage = () => {
           </span>
 
           <h1>Sign In</h1>
-          <p>Don&lsquo;t have an account? <Link href="/signup"><a>Sign Up</a></Link></p>
+          <div>Don&lsquo;t have an account? <Link href="/signup"><a>Sign Up</a></Link></div>
           <label htmlFor="">Username</label>
           <input className={`${errors.username ? "input-error" : "input-okay"}`} type="text" {...register("username")} />
           {errors.username && <span className="error">{errors.username.message}</span>}

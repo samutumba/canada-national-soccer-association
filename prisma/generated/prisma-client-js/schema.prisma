@@ -10,13 +10,24 @@ datasource db {
 
 generator client {
   provider        = "prisma-client-js"
-  output   = "./generated/prisma-client-js"
+  output          = "./generated/prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
 
 generator erd {
   provider = "prisma-erd-generator"
   output   = "../ERD.svg"
+}
+
+generator yup {
+  provider = "prisma-yup-generator"
+  output   = "../validators"
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+   output     = "../dbml"
+  outputName = "awesome.dbml"
 }
 
 model Player {
@@ -28,10 +39,11 @@ model Player {
   gender        String
   position      Postion
   healthRecord  HeathRecord?  @relation(fields: [heathRecordId], references: [id])
-  heathRecordId String        @unique
+  heathRecordId String?       @unique
   phone         String
   streetAddress String
   city          String
+  province      String        @default("ON")
   country       String        @default("ca")
   postalCode    String
   scholarship   Scholarship[]
@@ -96,7 +108,7 @@ model Institution {
   name        String              @unique
   address     String
   city        String
-  province    String
+  province    String              @default("ON")
   postal_code String
   category    InstitutionCategory
   scholarship Scholarship[]
@@ -175,7 +187,7 @@ model Season {
 
 model HeathRecord {
   id         String   @id @default(uuid())
-  cardNumber Int      @unique
+  cardNumber String   @unique
   issueDate  DateTime
   expiryDate DateTime
   Player     Player?

@@ -7,6 +7,7 @@ import { useMemo } from "react"
 import { PlayerScalarFieldEnumSchema } from "../../../validators/schemas/internals";
 import { Icon } from '@iconify/react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import Image from "next/image";
 
 const data01 = [
   { name: 'Group A', value: 400 },
@@ -42,7 +43,7 @@ const Game: NextPage = () => {
    :
    undefined 
 
- }, [games])
+ }, [games, router.query.id])
 
   const firstTeamGoals = useMemo(() => {
     let i = 0
@@ -58,7 +59,7 @@ const Game: NextPage = () => {
 
     return i
 
-  }, [game, players])
+  }, [game, players, teams.data])
 
   const secondTeamGoals = useMemo(() => {
     let i = 0
@@ -74,7 +75,7 @@ const Game: NextPage = () => {
 
     return i
 
-  }, [game, players])
+  }, [game, players, teams.data])
 
  
   return (<DashboardLayout>
@@ -101,34 +102,40 @@ const Game: NextPage = () => {
           </div>
           <div className="flex flex-col gap-1">
             {game?.events.map((event) => {
-              let icon = <Icon icon="fa6-solid:arrows-spin" className="text-red-500" />
+              let icon = <Icon icon="fa6-solid:arrows-spin" className="text-red-500 inline text-3xl"  />
               if (event.type == 'goal') {
-                icon = <Icon icon="ph:soccer-ball-fill" />
+                icon = <Icon icon="ph:soccer-ball-fill" className="inline  text-3xl" />
               } else if (event.type == 'yellow_card') {
-                icon = <Icon icon="fluent-emoji-flat:yellow-square" />
+                icon = <Icon icon="fluent-emoji-flat:yellow-square" className="inline  text-3xl" />
               } else if (event.type == 'red_card') {
-                icon = <Icon icon="twemoji:red-square" />
+                icon = <Icon icon="twemoji:red-square" className="inline  text-3xl" />
               } else if (event.type == 'substitution_on'){
-                icon = <Icon icon="fa6-solid:arrows-spin" className="text-green-500"/>
+                icon = <Icon icon="fa6-solid:arrows-spin" className="text-green-700 inline  text-3xl"/>
               }
 
 
-              return (<div key={event.id} className="m-2 p-3 capitalize text-center hover:bg-slate-300 hover:text-white">
-                {`${icon} - ${event.minute}'`}
+              return (<div key={event.id} className="m-2 p-2 capitalize flex flex-row gap-4 justify-center text-center items-center hover:bg-slate-300 hover:text-white">
+                {icon} {`${event.type} - ${event.minute}'`}
               </div>)
 
             })}
           </div>
        <div className="flex flex-col lg:flex-row gap-4 justify-evenly">
-         <span className=" prose ">
-           <img src="/images/lineup (1).png" alt="" className="w-full h-auto max-w-xs"/>
+            <span className=" prose ">
+              <span className="relative ml-3 mb-5 w-full h-auto max-w-xs">
+                <Image src="/images/lineup (1).png" alt="" layout="fill"   className="object-fit"/>
+              </span>
+              
            <label>Starters</label>
               <ol className=" prose ">
              {teams.data?.filter(t => t.squadId == game.team.at(0)?.squadId).at(0)?.starters.map((play) => <li key={play.id}>{ play.name }</li>)}
            </ol>
          </span>
             <span className=" prose ">
-           <img src="/images/lineup (3).png" alt="" className="w-full h-auto max-w-xs" />
+              <span className="relative w-full h-auto max-w-xs">
+                 <Image src="/images/lineup (3).png" alt="" layout="fill" className="object-fit" />
+              </span>
+          
            <label>Starters</label>
               <ol  >
              {teams.data?.filter(t => t.squadId == game.team.at(1)?.squadId).at(0)?.starters.map((play) => <li key={play.id}>{play.name}</li>)}
