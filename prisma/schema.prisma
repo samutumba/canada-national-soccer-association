@@ -2,16 +2,15 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
-  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  relationMode      = "foreignKeys"
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  output          = "./generated/prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
+  output   = "./generated/prisma-client-js"
 }
 
 generator erd {
@@ -25,8 +24,8 @@ generator yup {
 }
 
 generator dbml {
-  provider = "prisma-dbml-generator"
-   output     = "../dbml"
+  provider   = "prisma-dbml-generator"
+  output     = "../dbml"
   outputName = "awesome.dbml"
 }
 
