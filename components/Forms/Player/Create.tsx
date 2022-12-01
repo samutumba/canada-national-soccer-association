@@ -9,9 +9,14 @@ import 'react-phone-number-input/style.css'
 import { loadingState } from "../../../atoms";
 import { FieldError, useForm } from "react-hook-form";
 import { faker } from '@faker-js/faker/locale/en_CA';
-import { PlayerCreateInputObjectSchema } from "../../../validators/schemas/internals";
+//import { PlayerCreateInputObjectSchema } from "../../../validators/schemas/internals";
 import { create } from '../../../interfaces'
 import _ from "lodash";
+import * as Yup from 'yup'
+
+const PlayerCreateInputObjectSchema = Yup.object({
+  id: Yup.string(), name: Yup.string().required(), dob: Yup.date().required(), isDomestic: Yup.boolean(), gender: Yup.string().required(), phone: Yup.string().required(), streetAddress: Yup.string().required(), city: Yup.string().required(), province: Yup.string(), country: Yup.string(), postalCode: Yup.string().required(), 
+});
 
 import { SelectInput, DateInput, MobileInput, TextInput, BasicInput } from "../Input";
 import moment from "moment";

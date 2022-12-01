@@ -4,9 +4,13 @@ import { Prisma } from "../../../prisma/generated/prisma-client-js"
 import { Dialog } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useInstitutions, usePlayers } from "../../../hooks";
-import { SquadCreateInputObjectSchema } from "../../../validators/schemas/internals";
+// import { SquadCreateInputObjectSchema } from "../../../validators/schemas/internals";
 import { TextInput, SelectInput } from "../Input";
 import { MuiColorInput } from "mui-color-input";
+
+// const SquadCreateInputObjectSchema = Yup.object({
+//   id: Yup.string(), name: Yup.string().required(), players:  homeColor: Yup.mixed().oneOfSchemas([Yup.string()]), awayColor: Yup.mixed().oneOfSchemas([Yup.string()]), Team: TeamCreateNestedManyWithoutSquadInputObjectSchema
+// });
 
 export const SquadCreate = ({ children }: {children: React.ReactNode}) => {
  const [open, setOpen] = useState(false)
@@ -15,7 +19,7 @@ export const SquadCreate = ({ children }: {children: React.ReactNode}) => {
  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<Prisma.SquadCreateInput>(
   {
    mode: "onBlur",
-   resolver: yupResolver(SquadCreateInputObjectSchema),
+   //resolver: yupResolver(SquadCreateInputObjectSchema),
   }
  )
 
