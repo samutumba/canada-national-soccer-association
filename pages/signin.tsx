@@ -12,6 +12,8 @@ import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
+import { setCookie } from "cookies-next";
+import moment from "moment";
 
 const formSchema = Yup.object().shape({
   username: Yup.string()
@@ -49,7 +51,7 @@ const SignInPage: NextPage = () => {
 
     axios.post('/api/login', data).then((res) => {
       setLoading(false);
-      setCookie("auth", res.data.token, { expires: 1 })
+      setCookie('auth', res.data.token, { expires: moment().add(1, 'day').toDate() })
       toast.success("Welcome")
       router.push('/app');
     }).catch((err) => {

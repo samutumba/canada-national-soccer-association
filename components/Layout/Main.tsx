@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 export const MainLayout = ({ children }: {
-  children: React.ReactNode
+  children: React.ReactNode | React.ReactNode[]
 }) => {
   return (<div className="drawer font-paragraph">
     <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />

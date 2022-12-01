@@ -13,7 +13,7 @@ import { PlayerCreateInputObjectSchema } from "../../../validators/schemas/inter
 import { create } from '../../../interfaces'
 import _ from "lodash";
 
-import { SelectInput, DateInput, MobileInput, TextInput } from "../Input";
+import { SelectInput, DateInput, MobileInput, TextInput, BasicInput } from "../Input";
 import moment from "moment";
 import { useQueryClient } from "@tanstack/react-query";
 import { getCookie } from "cookies-next";
@@ -28,7 +28,9 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
     mode: "onTouched",
     resolver: yupResolver(PlayerCreateInputObjectSchema),
     defaultValues: {
-      name: player?.name || faker.name.fullName("male"),
+      name: player?.name || faker.name.fullName({
+        gender: "male",
+      }),
       dob: player?.dob || faker.date.between('1995-01-01T00:00:00.000Z', '2004-01-01T00:00:00.000Z'),
       isDomestic: player?.isDomestic || true,
       photo: player?.photo || faker.image.avatar(),
@@ -101,16 +103,12 @@ export const PlayerForm = ({ player, children }: { player?: Player, children: Re
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex mt-3 flex-col gap-2 w-full max-w-lg justify-center">
           <h1>{player ? "Update Player" : "Create Player"}</h1>
-          {/* <label>Name</label>
-         <input
-           type="text"
-           className={errors.name ? 'input-error' : 'input-okay'}
-           {...register('name')}
-         />
-     <ErrorMessage data={errors.name} /> */}
-          <TextInput
+
+          <BasicInput
             name="Name"
-            register={register("name")}
+            // @ts-ignore
+            value={watch("name")}
+            callback={(name) => setValue("name", name)}
             error={errors.name}
           />
 

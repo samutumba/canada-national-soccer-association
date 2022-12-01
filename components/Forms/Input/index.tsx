@@ -18,6 +18,23 @@ export const TextInput = ({ name, register, error, type }: {
  </>)
 }
 
+export const BasicInput = ({ name, value, callback, error, type }: {
+  type?: 'password' | 'text' | 'number',
+  name: string,
+  value: string,
+  callback: (arg0: string) => void
+  error?: FieldError | undefined,
+}) => {
+  return (<>
+    <label>{name}</label>
+    <input type={type ? type : "text"} className={error ? 'input-error' : 'input-okay'}
+      value={value}
+      onChange={(e) => callback(e.currentTarget.value || "")}
+    />
+    <ErrorMessage data={error} />
+  </>)
+}
+
 export const MobileInput = ({ name, value, error, callback }: {
   name: string,
   value: string,
