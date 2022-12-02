@@ -12,21 +12,21 @@ generator client {
   output   = "./generated/prisma-client-js"
 }
 
-generator erd {
-  provider = "prisma-erd-generator"
-  output   = "../ERD.svg"
-}
+// generator erd {
+//   provider = "prisma-erd-generator"
+//   output   = "../ERD.svg"
+// }
 
-generator yup {
-  provider = "prisma-yup-generator"
-  output   = "../validators"
-}
+// generator yup {
+//   provider = "prisma-yup-generator"
+//   output   = "../validators"
+// }
 
-generator dbml {
-  provider   = "prisma-dbml-generator"
-  output     = "../dbml"
-  outputName = "awesome.dbml"
-}
+// generator dbml {
+//   provider   = "prisma-dbml-generator"
+//   output     = "../dbml"
+//   outputName = "awesome.dbml"
+// }
 
 model Player {
   id            String        @id @default(uuid())
