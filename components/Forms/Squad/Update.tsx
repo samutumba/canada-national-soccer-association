@@ -47,7 +47,7 @@ export const SquadCreate = ({ children }: {children: React.ReactNode}) => {
 
  }
 
- const selectedPlayers = watch("players.connect.id")
+ //const selectedPlayers = watch("players.connect.id")
 
  return (<>
   <button onClick={() => setOpen(!open)}>
@@ -74,7 +74,7 @@ export const SquadCreate = ({ children }: {children: React.ReactNode}) => {
      <label>Players</label>
      <ul>
       {watch('players.connect.id')?.map((p) => {
-      return players.data.forEach(pl => {
+      return players?.data?.forEach(pl => {
        if (p == pl.id) {
         return(<>
         <li key={pl.id}>{pl.name}</li>
@@ -87,17 +87,22 @@ export const SquadCreate = ({ children }: {children: React.ReactNode}) => {
      
      <SelectInput name="" options={pOptions}
       callback={(v) => {
-       watch("players.connect.id") ?
-        setValue("players.connect.id", [watch("players.connect.id"), v])
-        : setValue("players.connect.id", [v])
+        setValue("players.connect.id", v)
       }}
-      error={errors?.players?.connect?.id}
      />
      <label>Home Color</label>
-     <MuiColorInput value={watch("homeColor")} format="hex" onChange={(c) =>  {c &&setValue("homeColor", c)}} />
+         <MuiColorInput
+           value={watch("homeColor")}
+           format="hex"
+           onChange={(c) => { c && setValue("homeColor", c) }}
+         />
 
      <label>Away Color</label>
-     <MuiColorInput value={watch("awayColor")} format="hex" onChange={(c) => { c && setValue("awayColor", c) }} />
+         <MuiColorInput 
+           value={watch("awayColor")}
+           format="hex"
+           onChange={(c) => { c && setValue("awayColor", c) }}
+         />
      
      <button className="btn-main">
        CREATE

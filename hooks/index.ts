@@ -12,7 +12,7 @@ export const useUser = () => {
 export const useLocations = () => {
  return useQuery<Location[], unknown>(['locations'], async () => {
   
-  const response = await axios.get('http://localhost:3000/api/data/location', {
+  const response = await axios.get('/api/data/location', {
    headers: {
     authorization: getCookie('auth')
    }
