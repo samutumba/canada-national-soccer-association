@@ -10,12 +10,12 @@ const Home: NextPage = () => {
     <AuthRestricted>
     <div className="w-full mt-4">
         <header className="px-5 flex h-full flex-col gap-1">
-   <div className="flex flex-col lg:flex-row border rounded-xl h-96 bg-crowd bg-cover mx-auto  max-w-screen-2xl w-full items-center">
-    <div className="lg:w-1/2 flex justify-start flex-col text-white items-center text-3xl lg:text-7xl h-full font-title font-bold bg-gradient-to-r rounded-l-xl from-black p-10">
-     <p className="text-xs lg:text-sm font-paragraph font-normal flex items-center gap-5 relative py-2 px-5 border border-burn bg-lavender text-burn rounded-full w-fit ml-0 mb-3">
+   <div className="flex flex-col lg:flex-row border rounded-xl h-[30rem] bg-crowd bg-cover mx-auto  max-w-screen-2xl w-full items-center">
+    <div className="lg:w-1/2 flex flex-col text-white items-center text-3xl lg:text-7xl w-full h-full font-title font-bold bg-gradient-to-r rounded-l-xl from-black p-10">
+     <p className="text-xs lg:text-sm font-paragraph font-normal flex gap-5 relative py-2 px-5 border border-burn bg-lavender text-burn rounded-full w-fit ml-0 mb-3">
       Sponsored by <Image src="/images/rbc.png" alt="RBC Canada" className="h-4 lg:h-6" height={24} width={56} />
      </p>
-     <h2>Find the next star</h2>
+     <h2 className='text-6xl text-left w-full'>Find the next star</h2>
      <p className="mt-3 w-full text-gray-300 font-paragraph font-normal text-sm lg:text-base">
       Welcome to the future of Canadian Scouting. <br />
       Plenty of talents at your fingertips. 
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
   <div className="flex justify-center flex-wrap text-center gap-4 my-2 items-center">
     <div className="flex flex-row gap-4 justify-center">
       <Avatar
-      src="https://media-exp1.licdn.com/dms/image/C4D03AQEJSRy1Dlr8zw/profile-displayphoto-shrink_800_800/0/1628211852205?e=1669248000&v=beta&t=UevwTFjva5nl8WylszA4HqYY0F661RZ8niaSQLGG1Cs"
+                  src="https://media-exp1.licdn.com/dms/image/C4D03AQEJSRy1Dlr8zw/profile-displayphoto-shrink_800_800/0/1628211852205?e=1675296000&v=beta&t=x83qZYCjyduKNvODMj2TDF2Z1X0c36X-_-_lwj82rk4"
       sx={{ width: 60, height: 60 }}
       >
        
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
      <div className="flex flex-col gap-4 justify-center">
        <div className="flex flex-row gap-4 justify-center">
       <Avatar
-      src="https://media-exp1.licdn.com/dms/image/C5603AQEk1aOfJE0FmA/profile-displayphoto-shrink_800_800/0/1638591960856?e=1669248000&v=beta&t=SmhSYH5A9Do8aH79RsQUIc15Cr98LmUb_KRmZD2XIB0"
+                    src="https://media-exp1.licdn.com/dms/image/C5603AQEk1aOfJE0FmA/profile-displayphoto-shrink_800_800/0/1638591960856?e=1675296000&v=beta&t=RVekvdbOHv_kYYEiekfKqaWbOntMWxoxguzPi9MzB3c"
       sx={{ width: 60, height: 60 }}
       >
        

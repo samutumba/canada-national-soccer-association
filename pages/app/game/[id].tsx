@@ -3,11 +3,13 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { DashboardLayout, PageTitle } from "../../../components";
 import { useGames, usePlayers, useTeams } from "../../../hooks"
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import { PlayerScalarFieldEnumSchema } from "../../../validators/schemas/internals";
 import { Icon } from '@iconify/react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 import Image from "next/image";
+import { loadingState } from "../../../atoms";
+import { useSetRecoilState } from "recoil";
 
 const data01 = [
   { name: 'Group A', value: 400 },
@@ -35,6 +37,7 @@ const Game: NextPage = () => {
   const games = useGames()
   const players = usePlayers()
   const teams = useTeams()
+  const setLoading = useSetRecoilState(loadingState)
  
  const game = useMemo(() => {
 
@@ -44,6 +47,11 @@ const Game: NextPage = () => {
    undefined 
 
  }, [games, router.query.id])
+
+
+  useEffect(() => {
+    game ? setLoading(false) : setLoading(true)
+  }, [game])
 
   const firstTeamGoals = useMemo(() => {
     let i = 0
@@ -80,7 +88,7 @@ const Game: NextPage = () => {
  
   return (<DashboardLayout>
     <>
-  <PageTitle title="Locations" description="Welcome back! Now let's find the next best thing" />
+  <PageTitle title="Game Overview" description="This game was exciting!" />
   <Head>
    <title>Game - CNSA</title>
    </Head>

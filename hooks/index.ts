@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
-import { Location, Player, Team, Institution, Squad, Game, GameEvent }from '../prisma/generated/prisma-client-js'
+import { Location, Player, Team, Institution, Squad, Game, GameEvent, Scholarship }from '../prisma/generated/prisma-client-js'
 
 export const useUser = () => {
  return useQuery(['useUser'], () => {
@@ -24,9 +24,14 @@ export const useLocations = () => {
 
 
 export const usePlayers = () => {
- return useQuery<Player[], unknown>(['players'], async () => {
+ return useQuery<(Player & {
+  scholarship: Scholarship[];
+  GameEvent: GameEvent[];
+  Squad: Squad[];
+  Team: Team[];
+ })[], unknown>(['players'], async () => {
 
-  const response = await axios.get('/api/data/player', {
+  const response = await axios.get('/api/player', {
    headers: {
     authorization: getCookie('auth')
    }

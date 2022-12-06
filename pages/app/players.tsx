@@ -4,6 +4,7 @@ import React from "react";
 import Head from "next/head";
 import { PlayerForm } from "../../components/Forms/Player/Create";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 
 const Home: NextPage = () => {
 
@@ -21,7 +22,12 @@ const Home: NextPage = () => {
               <span className="max-w-sm text-center gap-4 p-3 rounded-xl bg-primary text-white flex flex-row w-full">
                 <Icon icon="game-icons:soccer-field" className="text-2xl" /> Create New
               </span>
-            </PlayerForm>
+          </PlayerForm>
+          <Link href="/app/player/compare">
+            <span className="max-w-sm text-center gap-4 p-3 rounded-xl bg-white text-primary border-primary border flex flex-row w-full mt-3">
+              <Icon icon="game-icons:soccer-field" className="text-2xl" /> Compare
+            </span>
+          </Link>
           </span>
         </div>
         <SearchPlayers />

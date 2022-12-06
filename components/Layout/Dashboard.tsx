@@ -30,11 +30,11 @@ export const DashboardLayout = ({ children }: {
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-3 rounded-r-3xl col gap-4 font-semibold mx-2 overflow-y-auto w-80 bg-slate-50 flex-wrap  text-slate-400">
+          <ul className="menu p-3 rounded-r-3xl col gap-2 font-semibold overflow-x-none w-80 bg-slate-50 flex-wrap  text-slate-400">
             <li>
 
-              <div className="flex flex-col gap-2 justify-center">
-                <div className="flex flex-row gap-4 justify-center items-center">
+              <div className="flex flex-col gap-1 justify-center">
+                <div className="flex flex-row gap-2 justify-center items-center">
                   <Avatar
                     src={`https://avatars.dicebear.com/api/initials/${user?.username || "CNSA"}.svg`}
                     sx={{ width: 60, height: 60 }}
@@ -62,7 +62,7 @@ export const DashboardLayout = ({ children }: {
               </SidebarItem>
             </li>
             <li>
-              <SidebarItem link='/app/settings'>
+              <SidebarItem link='/app/competitions'>
                 <Icon icon="emojione-monotone:trophy" className='inline text-3xl' /> Competitions
               </SidebarItem>
             </li>

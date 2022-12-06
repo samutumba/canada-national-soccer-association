@@ -65,7 +65,7 @@ const SignUpPage: NextPage = () => {
          <Image src="/Soccerlogo.png" alt="SignIn" layout="fill" className="object-fit" />
        </span>
    <h1>Sign Up</h1>
-   <p>Already have an account? <Link href="/signin"><a>Sign In </a></Link></p>
+   <p>Already have an account? <Link href="/signin">Sign In </Link></p>
    <label htmlFor="">Username</label>
    <input className={`${errors.username ? "input-error" : "input-okay"}`} type="text" {...register("username")} />
    {errors.username && <span className="error">{ errors.username.message }</span>}

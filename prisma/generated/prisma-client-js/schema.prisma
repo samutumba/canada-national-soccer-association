@@ -2,33 +2,31 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
-  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  output          = "./generated/prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
+  output   = "./generated/prisma-client-js"
 }
 
-generator erd {
-  provider = "prisma-erd-generator"
-  output   = "../ERD.svg"
-}
+// generator erd {
+//   provider = "prisma-erd-generator"
+//   output   = "../ERD.svg"
+// }
 
-generator yup {
-  provider = "prisma-yup-generator"
-  output   = "../validators"
-}
+// generator yup {
+//   provider = "prisma-yup-generator"
+//   output   = "../validators"
+// }
 
-generator dbml {
-  provider = "prisma-dbml-generator"
-   output     = "../dbml"
-  outputName = "awesome.dbml"
-}
+// generator dbml {
+//   provider   = "prisma-dbml-generator"
+//   output     = "../dbml"
+//   outputName = "awesome.dbml"
+// }
 
 model Player {
   id            String        @id @default(uuid())

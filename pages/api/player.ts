@@ -27,8 +27,16 @@ export default async function handler(
        })
        break;
       case "GET":
-       
-      return res.status(200).json({ name: 'John Doe' })
+       const players = await client.player.findMany({
+         include: {
+           Squad: true,
+           Team: true,
+           GameEvent: true,
+           scholarship: true,
+          
+  }
+})
+       return res.status(200).json({ players })
      case 'PATCH':
       return res.status(200).json({ name: 'John Doe' })
 

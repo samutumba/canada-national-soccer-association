@@ -31,11 +31,19 @@ export default async function handler(
      const { name, dob, isDomestic, gender, position, healthRecordId, phone, streetAddress, city, province, country, postalCode, id } = req.body
 
      try {
-       const player = await client.$queryRaw`update into Player `
+       const player = await client.player.update({
+         where: {
+           id
+         },
+         data: {
+           name, dob, isDomestic, gender, position, phone, streetAddress, city, province, country, postalCode, 
+         }
+       })
+       return res.status(200).json({ message: 'Player Updated' })
      } catch (err) {
        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: err })
      }
-    return res.status(200).json({ name: 'John Doe' })
+
   case 'DELETE':
     return res.status(200).json({ name: 'John Doe' })
   default:

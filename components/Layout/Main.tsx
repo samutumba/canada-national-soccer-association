@@ -12,7 +12,8 @@ export const MainLayout = ({ children }: {
         <div className="mx-9">
           <span className="p-2 rounded-full opacity-75">
             <span className="relative ml-3 mb-5 w-16 h-16">
-              <Image src="/Soccerlogo.png" alt="SignIn" layout="fill" className="object-fit" />
+              
+              <Image src="/Soccerlogo.png" alt="SignIn" height={64} width={64} className="object-fit" />
             </span>
           </span>
 
@@ -30,7 +31,7 @@ export const MainLayout = ({ children }: {
         <div className="hidden lg:flex">
 
           <Link href="/signin">
-            <button className="py-2 px-5 rounded-full border border-matte">
+            <button className="py-2 px-5 rounded-full text-primary border border-matte">
               Sign In
             </button>
           </Link>
@@ -44,12 +45,12 @@ export const MainLayout = ({ children }: {
       <ul className="menu p-4 overflow-y-auto z-10 w-80 bg-base-100">
         <li>
           <Link href="/">
-            <a>
+            
               <span className="relative ml-3 mb-5 w-16 h-16">
-          <Image src="/Soccerlogo.png" alt="SignIn" layout="fill" className="object-fit" />
-        </span></a>
+          <Image src="/Soccerlogo.png" alt="SignIn" fill className="object-fit" />
+        </span>
         </Link></li>
-        <li><a href="/login" className="py-2 px-5 rounded-full border border-matte">Sign In</a></li>
+        <li><Link href="/signin" className="py-2 px-5 rounded-full border border-matte">Sign In</Link></li>
 
       </ul>
 

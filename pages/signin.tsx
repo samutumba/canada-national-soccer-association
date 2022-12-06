@@ -74,7 +74,7 @@ const SignInPage: NextPage = () => {
           </span>
 
           <h1>Sign In</h1>
-          <div>Don&lsquo;t have an account? <Link href="/signup"><a>Sign Up</a></Link></div>
+          <div>Don&lsquo;t have an account? <Link href="/signup">Sign Up</Link></div>
           <label htmlFor="">Username</label>
           <input className={`${errors.username ? "input-error" : "input-okay"}`} type="text" {...register("username")} />
           {errors.username && <span className="error">{errors.username.message}</span>}

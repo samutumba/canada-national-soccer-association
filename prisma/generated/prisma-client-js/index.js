@@ -373,16 +373,14 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Durham College\\Fall 2022\\DBAS 6206\\cnsa\\prisma\\generated\\prisma-client-js",
+      "value": "D:\\DurhamCollege\\Fall2022\\DBAS6206\\cnsa\\prisma\\generated\\prisma-client-js",
       "fromEnvVar": null
     },
     "config": {
       "engineType": "library"
     },
     "binaryTargets": [],
-    "previewFeatures": [
-      "referentialIntegrity"
-    ],
+    "previewFeatures": [],
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

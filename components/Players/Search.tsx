@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react';
 import _ from 'lodash';
 import moment from 'moment';
+import Link from 'next/link';
 import { useState, useMemo } from 'react';
 import { usePlayers } from '../../hooks';
 
@@ -50,7 +51,7 @@ export const SearchPlayers = () => {
              <td className='capitalize'>{_.replace(p.position.toString(), '_', " ") }</td>
              <td>{ moment(p.dob).fromNow(true) } old</td>
              <td>{ p.gender}</td>
-             <td><a href={`/app/players/${p.id}`} >View</a></td>
+             <td><Link href={`/app/player/${p.id}`} >View</Link></td>
            </tr>)
          }
          
