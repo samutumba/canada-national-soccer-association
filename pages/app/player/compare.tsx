@@ -219,7 +219,7 @@ const Compare: NextPage = () => {
       </LineChart>
      </ResponsiveContainer>
     </div>
-    <h1>Goals</h1>
+    <h1>Goals</h1> 
     <div className="relative h-96 w-full">
      <ResponsiveContainer width="100%" height="100%">
       <PieChart width={400} height={400}>
