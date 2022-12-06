@@ -74,7 +74,7 @@ const Compare: NextPage = () => {
   },
   {
    name: (player2?.name || ""),
-   value: player3Goals
+   value: player2Goals
   },
   {
    name: (player3?.name || ""),
@@ -95,9 +95,8 @@ const Compare: NextPage = () => {
     name="Player One"
     options={options}
      callback={(p) => {
-      let l = playerIds
-      l[0] = p
-      setPlayerIds(l) }}
+
+      setPlayerIds([...playerIds, p]) }}
     />
    </span>
    <span className="w-3/12">
@@ -105,9 +104,8 @@ const Compare: NextPage = () => {
    name="Player Two"
    options={options}
    callback={(p) => { 
-    let l = playerIds
-    l[1] = p
-    setPlayerIds(l)
+
+    setPlayerIds([...playerIds, p])
    }}
     />
    </span>
@@ -116,9 +114,9 @@ const Compare: NextPage = () => {
     name="Player Three"
     options={options}
      callback={(p) => {
-      let l = playerIds
-      l[2] = p
-      setPlayerIds(l) }}
+
+      setPlayerIds([...playerIds, p])
+     }}
    />
    </span>   
   </div>
