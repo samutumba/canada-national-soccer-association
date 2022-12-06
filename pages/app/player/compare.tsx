@@ -9,7 +9,17 @@ import { SelectInput } from "../../../components/Forms/Input";
 import Head from "next/head";
 import moment from "moment";
 import _ from "lodash";
+import Link from "next/link";
 import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line, Pie, PieChart } from "recharts";
+
+const insert = (arr: (string | null)[], index: number, newItem: string) => [
+ // part of the array before the specified index
+ ...arr.slice(0, index),
+ // inserted item
+ newItem,
+ // part of the array after the specified index
+ ...arr.slice(index)
+]
 
 const Compare: NextPage = () => {
  const players = usePlayers().data
@@ -17,7 +27,7 @@ const Compare: NextPage = () => {
  const teams = useTeams().data
  const setLoading = useSetRecoilState(loadingState)
 
- const [playerIds, setPlayerIds] = useState<string[]>([])
+ const [playerIds, setPlayerIds] = useState<(string|null)[]>([null, null, null])
 
  const options = players?.filter((p) => !playerIds.includes(p.id) && p).flatMap((p) => { return { label: p.name, value: p.id }}) || []
 
@@ -26,11 +36,11 @@ const Compare: NextPage = () => {
  }, [playerIds, players])
 
  const player2 = useMemo(() => {
-  return playerIds.at(1) ? players?.filter((p) => p.id == playerIds.at(0) && p).at(0) : undefined
+  return playerIds.at(1) ? players?.filter((p) => p.id == playerIds.at(1) && p).at(0) : undefined
  }, [playerIds, players])
 
  const player3 = useMemo(() => {
-  return playerIds.at(2) ? players?.filter((p) => p.id == playerIds.at(0) && p).at(0) : undefined
+  return playerIds.at(2) ? players?.filter((p) => p.id == playerIds.at(2) && p).at(0) : undefined
  }, [playerIds, players])
 
  const player1Events = player1?.GameEvent
@@ -95,17 +105,18 @@ const Compare: NextPage = () => {
     name="Player One"
     options={options}
      callback={(p) => {
-
-      setPlayerIds([...playerIds, p]) }}
+      const newP = insert(playerIds, 0, p)
+      setPlayerIds(newP) }}
     />
    </span>
    <span className="w-3/12">
     <SelectInput
    name="Player Two"
    options={options}
-   callback={(p) => { 
+     callback={(p) => { 
+      const newP = insert(playerIds, 1, p)
 
-    setPlayerIds([...playerIds, p])
+      setPlayerIds(newP)
    }}
     />
    </span>
@@ -114,8 +125,9 @@ const Compare: NextPage = () => {
     name="Player Three"
     options={options}
      callback={(p) => {
+      const newP = insert(playerIds, 2, p)
 
-      setPlayerIds([...playerIds, p])
+      setPlayerIds(newP)
      }}
    />
    </span>   
@@ -123,7 +135,7 @@ const Compare: NextPage = () => {
   {
    player1 && <div>
     <h2>Comparision</h2>
-    <table className="table w-full">
+    <table className="table w-full capitalize">
      <thead>
       <tr className="font-title">
        <th>Attribute</th>
@@ -135,9 +147,9 @@ const Compare: NextPage = () => {
      <tbody>
       <tr>
        <td>Age</td>
-       <td>{player1 && moment(player1?.dob).fromNow(true) + "old"}</td>
-       <td>{player2 && moment(player2?.dob).fromNow(true) + "old"}</td>
-       <td>{player3 && moment(player3?.dob).fromNow(true) + "old"}</td>
+       <td>{player1 && moment(player1?.dob).fromNow(true) + " old"}</td>
+       <td>{player2 && moment(player2?.dob).fromNow(true) + " old"}</td>
+       <td>{player3 && moment(player3?.dob).fromNow(true) + " old"}</td>
       </tr>
       <tr>
        <td>Sex</td>
@@ -175,6 +187,12 @@ const Compare: NextPage = () => {
        <td>{player2?.province}</td>
        <td>{player3?.province}</td>
       </tr>
+      <tr>
+       <td>View</td>
+       <td><Link href={`/app/player/${player1?.id}`}>View</Link></td>
+       <td><Link href={`/app/player/${player2?.id}`}>View</Link></td>
+       <td><Link href={`/app/player/${player3?.id}`}>View</Link></td>
+      </tr>
      </tbody>
     </table>
     <h1>Card Distribution</h1>
@@ -196,7 +214,7 @@ const Compare: NextPage = () => {
        <YAxis />
        <Tooltip />
        <Legend />
-       <Line type="monotone" dataKey="yellow_cards" stroke="#FFF2F1" activeDot={{ r: 8 }} />
+       <Line type="monotone" dataKey="yellow_cards" stroke="#8884d8" activeDot={{ r: 8 }} />
        <Line type="monotone" dataKey="red_cards" stroke="#C5281C" />
       </LineChart>
      </ResponsiveContainer>
