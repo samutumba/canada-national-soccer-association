@@ -36,7 +36,7 @@ export default async function handler(
            id
          },
          data: {
-           name, dob, isDomestic, gender, position, phone, streetAddress, city, province, country, postalCode, 
+           name, dob, isDomestic, gender, position, phone, streetAddress, city, province, country, postalCode
          }
        })
        return res.status(200).json({ message: 'Player Updated' })

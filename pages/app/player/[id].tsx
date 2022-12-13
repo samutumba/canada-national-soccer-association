@@ -30,9 +30,9 @@ const Home: NextPage = () => {
 
   const institution = institutions?.filter((i) => { if (i.id == player?.Squad.at(0)?.institutionId) return i }).at(0)
   const team = teams?.filter((t) => t.squadId == player?.Squad.at(0)?.id && t)
-  const goal = parseInt(faker.random.numeric()) 
-  const yellows = parseInt(faker.random.numeric())
-  const reds = parseInt(faker.random.numeric()) 
+  const goal = player?.GameEvent.filter((event) => { if (event.type === "goal") return event })?.length || 0
+  const yellows = player?.GameEvent.filter((event) => { if (event.type === "yellow_card") return event })?.length || 0
+  const reds = player?.GameEvent.filter((event) => { if (event.type === "red_card") return event })?.length || 0
 
  useEffect(() => {
   player ? setLoading(false) : setLoading(true)

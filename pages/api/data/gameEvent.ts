@@ -13,9 +13,12 @@ export default async function handler(
  res: NextApiResponse
 ) {
  await client.$connect();
- switch (req.method) {
-
-
+  switch (req.method)
+  {
+    case 'POST':
+      const gameEvents = await client.gameEvent.findMany({
+        
+      })
 
   case 'POST':
    try {

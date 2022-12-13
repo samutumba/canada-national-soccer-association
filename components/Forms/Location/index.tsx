@@ -114,9 +114,9 @@ export const LocationForm = ({ location, children }: { location?: Location, chil
             open={open}
      onClose={() => setOpen(false)}
      variant="temporary"
-      sx={{
-        width: 384
-        }}
+     PaperProps={{
+       sx: { width: 450 },
+     }}
           >
    <div className="w-full px-4 py-4  h-full flex flex-col gap-4">
     <Icon icon="game-icons:soccer-field"  className="text-2xl"/>

@@ -17,18 +17,17 @@ export const NonAuthRestricted = ({ children }: {
   useEffect(() => {
 
     if (!user) {
-        setLoading(true)
       const token = getCookie('auth')
     axios.get('/api/user', {
       headers: {
         authorization: token
       }
     }).then((res) => {
-      setLoading(false);
+     
       setUser(res.data.user)
 
     }).catch(() => {
-      setLoading(false);
+      
       setUser(undefined)
       toast.error("Please Sign in to continue")
       router.push('/signin')
@@ -55,10 +54,9 @@ export const AuthRestricted = ({ children }: {
   const [ user, setUser ] = useRecoilState(UserState)
 
   useEffect(() => {
-
-    !user &&
-    setLoading(true)
     const tokenCookie = getCookie('auth')
+    !user &&
+   
     axios.get('/api/user', {
       headers: {
         authorization: tokenCookie

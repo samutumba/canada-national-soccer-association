@@ -1,8 +1,11 @@
 import { NextPage } from "next";
 import { DashboardLayout, PageTitle  } from "../../components"
 import { SquadCreate } from '../../components/Forms/Squad/Update';
+import { useTeams } from "../../hooks";
 
 const Home: NextPage = () => {
+ const teams = useTeams()
+
  return (<DashboardLayout>
   <div>
   <PageTitle title="Teams" description="View Teams " />
@@ -17,6 +20,54 @@ const Home: NextPage = () => {
     </SquadCreate>
    </span>
    </div>
+   {
+    teams.data && <>
+     <h2>Our Locations</h2>
+     <div className="overflow-x-auto mx-4 mt-3 bg-white rounded-2xl p-3">
+      <table className="table table-compact w-full">
+       <thead>
+        <tr>
+         <th></th>
+         <th>Name</th>
+         <th>Formation</th>
+         <th>City</th>
+         <th>Province</th>
+         <th>Country</th>
+         <th>Postal Code</th>
+         <th></th>
+        </tr>
+       </thead>
+       <tbody>
+        {teams.data?.map((location) =>
+         <tr key={location.id}>
+          <th></th>
+          <td>{location.squad.name}</td>
+          <td>{location.formation}</td>
+          <td>{location.Game?.attendance}</td>
+          <td>{location.province}</td>
+          <td><Icon icon={`cif:${location.country}`} /></td>
+          <td>{location.postalCode}</td>
+          <td>
+         
+          </td>
+         </tr>)}
+       </tbody>
+       <tfoot>
+        <tr>
+         <th></th>
+         <th>Name</th>
+         <th>Street</th>
+         <th>City</th>
+         <th>Province</th>
+         <th>Country</th>
+         <th>Postal Code</th>
+         <th></th>
+        </tr>
+       </tfoot>
+      </table>
+     </div>
+    </>
+   }
   </div>
  </DashboardLayout>
 )
