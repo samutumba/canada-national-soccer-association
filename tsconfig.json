@@ -15,10 +15,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true
   },
   "include": [
     "next-env.d.ts",
@@ -30,6 +30,12 @@
     "**/**/**/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
-  ]
+    "node_modules/**"
+  ],
+  "experimental": {
+    "transpilePackages": [
+      "@geoapify/geocoder-autocomplete",
+      "@geoapify/react-geocoder-autocomplete"
+    ]
+  }
 }

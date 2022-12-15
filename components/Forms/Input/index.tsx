@@ -4,8 +4,21 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 //import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
-import '@geoapify/geocoder-autocomplete/styles/minimal.css'
+import { useEffect, useState } from "react";
+import dynamic from 'next/dynamic'
+import React from "react"
+const NonSSRWrapper = (props: {children: React.ReactNode}) => (
+  <React.Fragment>{props.children}</React.Fragment>
+)
+export default dynamic(() => Promise.resolve(NonSSRWrapper), {
+  ssr: false
+})
+
+
+const AddressAutofill = dynamic(async () => 
+  (await import('@mapbox/search-js-react')).AddressAutofill, {
+  ssr: false,
+})
 
 export const TextInput = ({ name, register, error, type }: {
   type?: 'password' | 'text' | 'number',
@@ -17,7 +30,7 @@ export const TextInput = ({ name, register, error, type }: {
   <label>{name}</label>
   <input type={type ? type : "text"} className={error ? 'input-error' : 'input-okay'} {...register} />
   <ErrorMessage data={error} />
- </>)
+ </>) 
 }
 
 export const BasicInput = ({ name, value, callback, error, type }: {
@@ -43,19 +56,39 @@ export const AddressInput = ({ name, value, callback, error }: {
   callback: (arg0: string) => void
   error?: FieldError | undefined,
 }) => {
+  const [open, setOpen] = useState(false)
 
-  const apiKey = process.env.GEOAPIFY_API
-  return (<>
-    <GeoapifyContext apiKey={apiKey} >
-      <label>{name}</label>
-      <GeoapifyGeocoderAutocomplete
-        lang="en"
-        value={value}
-        placeSelect={callback} 
-      />
-    </GeoapifyContext>
+  useEffect(() => {
+    if (typeof window !== "undefined")
+    {
+      setOpen(true)
+    }
+  
+    () => {
+      setOpen(false)
+    }
+  }, [window])
+  
+  const apiKey = process.env.MAPBOX_API || ""
+
+  if (open)
+  {
+     return (<>
+       <label>{name}</label>
+       <NonSSRWrapper>
+         <AddressAutofill accessToken={apiKey}>
+      <input type="text" autoComplete="address-line1" className={error ? 'input-error' : 'input-okay'}
+      value={value}
+      onChange={(e) => callback(e.currentTarget.value || "")}
+    />
+    </AddressAutofill>
+       </NonSSRWrapper>
+    
     <ErrorMessage data={error} />
   </>)
+  }
+ 
+  return <></>
 }
 
 

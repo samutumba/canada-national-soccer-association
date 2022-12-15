@@ -29,7 +29,6 @@ export default async function handler(
       }
 
     case "GET":
-      if (await isAuthenticated(req)) {
         await client.$connect()
 
         const locations = await client.location.findMany()
@@ -37,9 +36,7 @@ export default async function handler(
         await client.$disconnect()
 
         return res.status(httpStatus.OK).json({ message: 'Location Found', locations });
-      } else {
-        return res.status(httpStatus.UNAUTHORIZED).json({ name: 'Unauthorized' });
-      }
+      
 
     case 'PATCH':
       const { id, name, category, streetAddress, city, province, country, postalCode } = req.body

@@ -6,6 +6,7 @@ import { useRecoilState, useSetRecoilState } from "recoil"
 import { loadingState, UserState } from "../../atoms"
 import axios from "axios"
 import { getCookie } from "cookies-next"
+import { ScholarshipUncheckedCreateNestedManyWithoutSponsorInputObjectSchema } from "../../validators/schemas/internals"
 
 export const NonAuthRestricted = ({ children }: {
   children: React.ReactNode,
@@ -55,6 +56,11 @@ export const AuthRestricted = ({ children }: {
 
   useEffect(() => {
     const tokenCookie = getCookie('auth')
+
+    if (user)
+    {
+      router.push('/app')
+    }
     !user &&
    
     axios.get('/api/user', {
@@ -70,6 +76,8 @@ export const AuthRestricted = ({ children }: {
       setLoading(false);
       setUser(undefined)
     })
+
+
   
   }, [router, setLoading, setUser, user])
 
