@@ -130,6 +130,7 @@ exports.Prisma.HeathRecordScalarFieldEnum = makeEnum({
 
 exports.Prisma.InjuryScalarFieldEnum = makeEnum({
   id: 'id',
+  description: 'description',
   playerId: 'playerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

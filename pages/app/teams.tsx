@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import { NextPage } from "next";
 import { DashboardLayout, PageTitle  } from "../../components"
 import { SquadCreate } from '../../components/Forms/Squad/Update';
@@ -43,10 +44,7 @@ const Home: NextPage = () => {
           <th></th>
           <td>{location.squad.name}</td>
           <td>{location.formation}</td>
-          <td>{location.Game?.attendance}</td>
-          <td>{location.province}</td>
-          <td><Icon icon={`cif:${location.country}`} /></td>
-          <td>{location.postalCode}</td>
+          
           <td>
          
           </td>

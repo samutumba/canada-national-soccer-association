@@ -292,6 +292,7 @@ enum Postion {
 model Injury {
   id        String      @id @default(uuid())
   player    Player      @relation(fields: [playerId], references: [id])
+  description String
   playerId  String
   Operation Operation[]
   createdAt DateTime    @default(now())

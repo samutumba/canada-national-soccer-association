@@ -4,6 +4,8 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 //import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
+import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 
 export const TextInput = ({ name, register, error, type }: {
   type?: 'password' | 'text' | 'number',
@@ -34,6 +36,28 @@ export const BasicInput = ({ name, value, callback, error, type }: {
     <ErrorMessage data={error} />
   </>)
 }
+
+export const AddressInput = ({ name, value, callback, error }: {
+  name: string,
+  value: string,
+  callback: (arg0: string) => void
+  error?: FieldError | undefined,
+}) => {
+
+  const apiKey = process.env.GEOAPIFY_API
+  return (<>
+    <GeoapifyContext apiKey={apiKey} >
+      <label>{name}</label>
+      <GeoapifyGeocoderAutocomplete
+        lang="en"
+        value={value}
+        placeSelect={callback} 
+      />
+    </GeoapifyContext>
+    <ErrorMessage data={error} />
+  </>)
+}
+
 
 export const MobileInput = ({ name, value, error, callback }: {
   name: string,

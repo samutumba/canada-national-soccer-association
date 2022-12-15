@@ -14,6 +14,7 @@ import Select from 'react-select';
 import { faker } from '@faker-js/faker/locale/en_CA';
 import { getCookie } from 'cookies-next';
 import { useQueryClient } from '@tanstack/react-query'
+import { AddressInput } from "../Input";
 
 
 const categories: LocationCategory[] = ["field" , "stadium" , "park" , "other"]
@@ -56,7 +57,7 @@ export const LocationForm = ({ location, children }: { location?: Location, chil
  const [open, setOpen] = useState(false)
   const setLoading  = useSetRecoilState(loadingState)
 
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<createOrUpdateLocationState>({
+  const { register, handleSubmit, setValue, watch, getValues, formState: { errors } } = useForm<createOrUpdateLocationState>({
    mode: "onTouched",
     resolver: yupResolver(formSchema),
     defaultValues: {
@@ -135,10 +136,12 @@ export const LocationForm = ({ location, children }: { location?: Location, chil
            onChange={ (value, a) =>  value?.value && setValue('category', value.value)} />
          {errors.category && <span className="error">{ errors.category.message }</span>}
 
-
-         <label>Street Address</label>
-         <input className={errors.streetAddress ? "input-error" : "input-okay"} {...register('streetAddress')} />
-          {errors.streetAddress && <span className="error">{ errors.streetAddress.message }</span>}
+         <AddressInput
+           name="Street Address"
+           value={watch('streetAddress')}
+           callback={(v) => setValue('streetAddress', v)}
+           error={errors.streetAddress}
+         />
          
          <label>City</label>
          <input className={errors.city ? "input-error" : "input-okay"} {...register('city')}  />

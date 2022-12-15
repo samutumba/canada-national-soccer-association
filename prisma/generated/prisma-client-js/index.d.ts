@@ -222,6 +222,7 @@ export type Interview = {
  */
 export type Injury = {
   id: string
+  description: string
   playerId: string
   createdAt: Date
   updatedAt: Date
@@ -17147,6 +17148,7 @@ export namespace Prisma {
 
   export type InjuryMinAggregateOutputType = {
     id: string | null
+    description: string | null
     playerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17154,6 +17156,7 @@ export namespace Prisma {
 
   export type InjuryMaxAggregateOutputType = {
     id: string | null
+    description: string | null
     playerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17161,6 +17164,7 @@ export namespace Prisma {
 
   export type InjuryCountAggregateOutputType = {
     id: number
+    description: number
     playerId: number
     createdAt: number
     updatedAt: number
@@ -17170,6 +17174,7 @@ export namespace Prisma {
 
   export type InjuryMinAggregateInputType = {
     id?: true
+    description?: true
     playerId?: true
     createdAt?: true
     updatedAt?: true
@@ -17177,6 +17182,7 @@ export namespace Prisma {
 
   export type InjuryMaxAggregateInputType = {
     id?: true
+    description?: true
     playerId?: true
     createdAt?: true
     updatedAt?: true
@@ -17184,6 +17190,7 @@ export namespace Prisma {
 
   export type InjuryCountAggregateInputType = {
     id?: true
+    description?: true
     playerId?: true
     createdAt?: true
     updatedAt?: true
@@ -17270,6 +17277,7 @@ export namespace Prisma {
 
   export type InjuryGroupByOutputType = {
     id: string
+    description: string
     playerId: string
     createdAt: Date
     updatedAt: Date
@@ -17295,6 +17303,7 @@ export namespace Prisma {
   export type InjurySelect = {
     id?: boolean
     player?: boolean | PlayerArgs
+    description?: boolean
     playerId?: boolean
     Operation?: boolean | OperationFindManyArgs
     createdAt?: boolean
@@ -19183,6 +19192,7 @@ export namespace Prisma {
 
   export const InjuryScalarFieldEnum: {
     id: 'id',
+    description: 'description',
     playerId: 'playerId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -20228,6 +20238,7 @@ export namespace Prisma {
     NOT?: Enumerable<InjuryWhereInput>
     id?: StringFilter | string
     player?: XOR<PlayerRelationFilter, PlayerWhereInput>
+    description?: StringFilter | string
     playerId?: StringFilter | string
     Operation?: OperationListRelationFilter
     createdAt?: DateTimeFilter | Date | string
@@ -20237,6 +20248,7 @@ export namespace Prisma {
   export type InjuryOrderByWithRelationInput = {
     id?: SortOrder
     player?: PlayerOrderByWithRelationInput
+    description?: SortOrder
     playerId?: SortOrder
     Operation?: OperationOrderByRelationAggregateInput
     createdAt?: SortOrder
@@ -20249,6 +20261,7 @@ export namespace Prisma {
 
   export type InjuryOrderByWithAggregationInput = {
     id?: SortOrder
+    description?: SortOrder
     playerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -20262,6 +20275,7 @@ export namespace Prisma {
     OR?: Enumerable<InjuryScalarWhereWithAggregatesInput>
     NOT?: Enumerable<InjuryScalarWhereWithAggregatesInput>
     id?: StringWithAggregatesFilter | string
+    description?: StringWithAggregatesFilter | string
     playerId?: StringWithAggregatesFilter | string
     createdAt?: DateTimeWithAggregatesFilter | Date | string
     updatedAt?: DateTimeWithAggregatesFilter | Date | string
@@ -21413,6 +21427,7 @@ export namespace Prisma {
   export type InjuryCreateInput = {
     id?: string
     player: PlayerCreateNestedOneWithoutInjuryInput
+    description: string
     Operation?: OperationCreateNestedManyWithoutInjuryInput
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21420,6 +21435,7 @@ export namespace Prisma {
 
   export type InjuryUncheckedCreateInput = {
     id?: string
+    description: string
     playerId: string
     Operation?: OperationUncheckedCreateNestedManyWithoutInjuryInput
     createdAt?: Date | string
@@ -21429,6 +21445,7 @@ export namespace Prisma {
   export type InjuryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     player?: PlayerUpdateOneRequiredWithoutInjuryNestedInput
+    description?: StringFieldUpdateOperationsInput | string
     Operation?: OperationUpdateManyWithoutInjuryNestedInput
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21436,6 +21453,7 @@ export namespace Prisma {
 
   export type InjuryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     playerId?: StringFieldUpdateOperationsInput | string
     Operation?: OperationUncheckedUpdateManyWithoutInjuryNestedInput
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21444,6 +21462,7 @@ export namespace Prisma {
 
   export type InjuryCreateManyInput = {
     id?: string
+    description: string
     playerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21451,12 +21470,14 @@ export namespace Prisma {
 
   export type InjuryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InjuryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     playerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22407,6 +22428,7 @@ export namespace Prisma {
 
   export type InjuryCountOrderByAggregateInput = {
     id?: SortOrder
+    description?: SortOrder
     playerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22414,6 +22436,7 @@ export namespace Prisma {
 
   export type InjuryMaxOrderByAggregateInput = {
     id?: SortOrder
+    description?: SortOrder
     playerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22421,6 +22444,7 @@ export namespace Prisma {
 
   export type InjuryMinOrderByAggregateInput = {
     id?: SortOrder
+    description?: SortOrder
     playerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -24214,6 +24238,7 @@ export namespace Prisma {
 
   export type InjuryCreateWithoutPlayerInput = {
     id?: string
+    description: string
     Operation?: OperationCreateNestedManyWithoutInjuryInput
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24221,6 +24246,7 @@ export namespace Prisma {
 
   export type InjuryUncheckedCreateWithoutPlayerInput = {
     id?: string
+    description: string
     Operation?: OperationUncheckedCreateNestedManyWithoutInjuryInput
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24411,6 +24437,7 @@ export namespace Prisma {
     OR?: Enumerable<InjuryScalarWhereInput>
     NOT?: Enumerable<InjuryScalarWhereInput>
     id?: StringFilter | string
+    description?: StringFilter | string
     playerId?: StringFilter | string
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
@@ -26536,12 +26563,14 @@ export namespace Prisma {
   export type InjuryCreateWithoutOperationInput = {
     id?: string
     player: PlayerCreateNestedOneWithoutInjuryInput
+    description: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type InjuryUncheckedCreateWithoutOperationInput = {
     id?: string
+    description: string
     playerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26560,12 +26589,14 @@ export namespace Prisma {
   export type InjuryUpdateWithoutOperationInput = {
     id?: StringFieldUpdateOperationsInput | string
     player?: PlayerUpdateOneRequiredWithoutInjuryNestedInput
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InjuryUncheckedUpdateWithoutOperationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     playerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26598,6 +26629,7 @@ export namespace Prisma {
 
   export type InjuryCreateManyPlayerInput = {
     id?: string
+    description: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26681,6 +26713,7 @@ export namespace Prisma {
 
   export type InjuryUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     Operation?: OperationUpdateManyWithoutInjuryNestedInput
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26688,6 +26721,7 @@ export namespace Prisma {
 
   export type InjuryUncheckedUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     Operation?: OperationUncheckedUpdateManyWithoutInjuryNestedInput
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26695,6 +26729,7 @@ export namespace Prisma {
 
   export type InjuryUncheckedUpdateManyWithoutInjuryInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

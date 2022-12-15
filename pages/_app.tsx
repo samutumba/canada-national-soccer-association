@@ -7,6 +7,7 @@ import { Loader } from '../components'
 import { Hydrate, QueryClient, QueryClientProvider, dehydrate, } from '@tanstack/react-query'
 import React, { Suspense, useEffect, useState } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Disclaimer } from '../components/Disclaimer';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -56,6 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 reverseOrder={false}
               />
               <Loader />
+              <Disclaimer />
               <ReactQueryDevtools initialIsOpen={false} />
             </RecoilRoot>
           </Hydrate>
